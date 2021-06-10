@@ -5,8 +5,15 @@ const connectDB = require("./config/db");
 // Connect Database
 connectDB();
 
+// Init Middleware
+app.use(express.json({
+    extended: false
+}))
+
+app.use("/api/users", require("./routes/api/users"));
+
 app.get("/", (req, res) => {
-  res.send("Home page");
+    res.send("Home page");
 });
 
 const PORT = process.env.PORT || 5000;
