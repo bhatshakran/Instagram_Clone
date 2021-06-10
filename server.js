@@ -9,8 +9,10 @@ connectDB();
 app.use(express.json({
     extended: false
 }))
-
+// Register user routing
 app.use("/api/users", require("./routes/api/users"));
+// Auth routing
+app.use("/api/auth", require("./routes/api/auth"));
 
 app.get("/", (req, res) => {
     res.send("Home page");
