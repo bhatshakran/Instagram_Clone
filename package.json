@@ -1,0 +1,17 @@
+{
+  "name": "instagram_clone",
+  "version": "1.0.0",
+  "description": "Instagram Clone built using MERN",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Bhat Shaqran",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.3.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.13"
+  }
+}
