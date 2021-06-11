@@ -13,8 +13,13 @@ module.exports = function (req, res, next) {
   // Verify token
   try {
     const decoded = jwt.verify(token, config.get("jwtToken"));
-    req.user = decoded.id;
+    if  (decoded.user)  {
+      req.user = decoded.user;
+    }  else  {
+      req.user = decoded.id;
+    }
 
+    
     next();
   } catch (err) {
     res.status(401).json({ msg: "Token is  not valid" });

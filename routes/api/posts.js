@@ -24,7 +24,7 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.user).select("-password");
+      const user = await User.findById(req.user.id).select("-password");
 
       const newPost = new Post({
         title: req.body.title,
@@ -50,6 +50,24 @@ router.get('/', auth, async(req,res) => {
   try {
     const posts = await Post.find().sort({date:-1})
     res.json(posts)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+
+// @route GET api/posts/myposts
+//  @desc Get my posts
+// @access Private
+router.get('/myposts', auth, async(req, res)=>{
+
+  try {
+    // console.log(req.user)
+    const myposts = await Post.find({postedBy:req.user.id})
+    console.log(myposts)
+
+    res.json(myposts)
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server Error')

@@ -65,10 +65,9 @@ router.post("/",
     }
 
     const payload = {
-      user:{
+      user: {
         id: user.id,
-      }
-    
+      },
     };
 
     // Sign a token for the user
