@@ -5,6 +5,21 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const User = require("../../models/User");
+const auth = require("../../middleware/auth");
+
+// @route GET api/auth
+//  @desc TEST route
+// @access Public
+
+router.get("/test", auth, (req, res) => {
+  res.send("You can go ahead");
+});
+
+
+
+
+
+
 
 // @route POST api/auth
 //  @desc Authenticate User
@@ -50,7 +65,7 @@ router.post("/",
 
     
     const payload = {
-      _id: user.id,
+      id: user.id,
     };
 
     // Sign a token for the user
