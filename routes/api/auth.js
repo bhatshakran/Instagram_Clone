@@ -40,6 +40,7 @@ router.post("/",
   const {email, password} = req.body
   try {
     let user = await User.findOne({ email });
+    console.log(user.id);
     // Check if user exists
     if (!user) {
       return res.status(400).json({
@@ -63,9 +64,11 @@ router.post("/",
       });
     }
 
-    
     const payload = {
-      id: user.id,
+      user:{
+        id: user.id,
+      }
+    
     };
 
     // Sign a token for the user
