@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AiFillHome, AiOutlineLogin } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
+import { AiFillHome } from "react-icons/ai";
+import { RiLoginCircleFill } from "react-icons/ri";
+import { FaUserPlus, FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   return (
@@ -11,13 +12,17 @@ const Navbar = () => {
       </div>
       <ul className="nav-items flex items-center gap-4 ">
         <li className="nav-item cursor-pointer text-xl">
-          <AiFillHome />
+            <Link  to ='/'> <AiFillHome /></Link>
+         
         </li>
         <li className="nav-item cursor-pointer text-xl">
-          <AiOutlineLogin />
+         <Link to='/login'><RiLoginCircleFill /></Link> 
         </li>
         <li className="nav-item cursor-pointer text-xl">
-          <CgProfile />
+          <Link to='/register'><FaUserPlus /></Link>
+        </li>
+        <li className="nav-item cursor-pointer text-xl">
+         <Link to='/profile'> <FaUserCircle /></Link>
         </li>
       </ul>
     </nav>
