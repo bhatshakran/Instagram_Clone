@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const config = require("config");
+const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const User = require("../../models/User");
 
@@ -22,27 +24,46 @@ router.post("/",
 
   const {email, password} = req.body
   try {
-
-    let user = await User.findOne({ email })
+    let user = await User.findOne({ email });
     // Check if user exists
-    if(!user){
-      return res.status(400).json({errors:[{
-        msg:'Invalid Credentials!'
-      }]})
+    if (!user) {
+      return res.status(400).json({
+        errors: [
+          {
+            msg: "Invalid Credentials!",
+          },
+        ],
+      });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.password);
     // Check if password is correct
-    if(!isMatch){
-      return res.status(400).json({errors:[{
-        msg:'Invalid Credentials!'
-      }]})
+    if (!isMatch) {
+      return res.status(400).json({
+        errors: [
+          {
+            msg: "Invalid Credentials!",
+          },
+        ],
+      });
     }
-
-    res.status(200).json({msg:'Signin successfull!'})
-
 
     
+    const payload = {
+      _id: user.id,
+    };
+
+    // Sign a token for the user
+
+    jwt.sign(
+      payload,
+      config.get("jwtToken"),
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server Error')
