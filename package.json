@@ -1,6 +1,7 @@
 {
   "name": "instagram_clone",
   "version": "1.0.0",
+<<<<<<< HEAD
   "description": "Instagram clone app with MERN",
   "main": "index.js",
   "author": "BHAT SHAQRAN",
@@ -13,14 +14,29 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+=======
+  "description": "Instagram Clone built using MERN",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Bhat Shaqran",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.2.0",
+>>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
     "config": "^3.3.6",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.13"
+<<<<<<< HEAD
   },
   "devDependencies": {
     "concurrently": "^6.2.0"
+=======
+>>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
   }
 }
