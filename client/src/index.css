@@ -22,9 +22,30 @@
         width:350px;
         height:520px
     }
+    .maincontainer{
+        width:614px;
+    }
 
+    .postcard{
+        height:987px;
+    }
+
+    .top{
+        height:60px;
+    }
+
+    .medium{
+        height:750px;
+    }
+    .fill{
+        max-height:750px;
+    }
+
+    .bottom{
+        height:177px;
+    }
     @media  (max-width:350px){
-        .card, .smallcard{
+        .card, .smallcard, .largecard{
             width:95vw;      
         }
     }
