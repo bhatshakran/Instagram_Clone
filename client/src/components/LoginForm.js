@@ -2,8 +2,11 @@ import { useFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/features/auth/auth";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   // Validate form values
   const validate = (values) => {
     const errors = {};
@@ -25,6 +28,7 @@ const LoginForm = () => {
 
   const onSubmit = (values) => {
     console.log(values);
+    dispatch(loginUser(values));
   };
 
   const formik = useFormik({

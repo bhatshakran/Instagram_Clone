@@ -1,18 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
-// import { useSelector, useDispatch } from "react-redux";
-// import { register_success } from "../redux/features/auth/auth";
+
 
 const Login = () => {
+  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   
   return (
     <React.Fragment>
       <div className="mx-auto mt-8 border border-gray-200 card">
+        {isAuthenticated ? (
+          <div className="w-full mt-2 mb-2 text-white bg-blue-500">
+            Logged In
+          </div>
+        ) : (
+          ""
+        )}
         <h1 className="pt-6 text-5xl text-center font-grand-hotel">
           Instagram
         </h1>
-          <LoginForm />
+        <LoginForm />
       </div>
       <div className="flex items-center justify-center mx-auto mt-3 text-sm border border-gray-200 smallcard">
         <span className="font-light ">Don't have an account?</span>

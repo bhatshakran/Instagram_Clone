@@ -1,6 +1,5 @@
-import { createSlice,createAsyncThunk, } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
 
 export const registerUser = createAsyncThunk("/api/users", async (values) => {
   const config = {
@@ -34,6 +33,5 @@ export const registerSlice = createSlice({
     },
   },
 });
-
 
 export default registerSlice.reducer;
