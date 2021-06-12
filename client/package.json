@@ -2,23 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-<<<<<<< HEAD
-  "dependencies": {
-    "@craco/craco": "^6.1.2",
-    "@reduxjs/toolkit": "^1.6.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "init": "^0.1.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "tailwindcss-cli": "^0.1.2",
-    "web-vitals": "^1.0.1"
-=======
   "proxy": "http://localhost:5000",
   "dependencies": {
     "@craco/craco": "^5.8.0",
@@ -31,7 +14,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^1.1.5",
     "web-vitals": "^1.1.2"
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
   },
   "scripts": {
     "start": "craco start",
@@ -58,14 +40,8 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "autoprefixer": "^9",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
-=======
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.4"
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
   }
 }

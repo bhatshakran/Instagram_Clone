@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
-<<<<<<< HEAD
 import { useSelector, useDispatch } from "react-redux";
 import { register_success } from "../redux/features/auth/auth";
 
@@ -14,10 +13,6 @@ const Login = () => {
     e.preventDefault();
     dispatch(register_success());
   };
-=======
-
-const Login = () => {
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
   return (
     <React.Fragment>
       <div className="mx-auto mt-8 border border-gray-200 card">
@@ -42,10 +37,7 @@ const Login = () => {
           <input
             type="submit"
             value="Login"
-<<<<<<< HEAD
             onClick={loginHandler}
-=======
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
             className="w-3/4 py-1 mx-auto mt-4 text-white bg-blue-300 rounded-sm cursor-pointer hover:bg-instablue-default"
           />
 

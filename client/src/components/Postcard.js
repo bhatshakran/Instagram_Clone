@@ -19,49 +19,29 @@ const Postcard = () => {
         <div className="flex items-center ml-3 icons">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-<<<<<<< HEAD
             className="w-8 h-8"
-=======
-            class="h-8 w-8"
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
             <path
-<<<<<<< HEAD
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1"
-=======
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1"
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
               d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             />
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-<<<<<<< HEAD
             className="w-8 h-8"
-=======
-            class="h-8 w-8"
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
             <path
-<<<<<<< HEAD
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1"
-=======
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1"
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
               d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
             />
           </svg>
@@ -73,17 +53,10 @@ const Postcard = () => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-<<<<<<< HEAD
             strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"
             className="feather feather-send"
-=======
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-send"
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
           >
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
