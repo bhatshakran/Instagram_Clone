@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { register_success } from "../redux/features/auth/auth";
+import { registerUser } from "../redux/features/auth/auth";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const SignupForm = () => {
 
   // Submit function
   const onSubmit = (values) => {
-    dispatch(register_success(values));
+    dispatch(registerUser(values));
   };
 
   //   Formik form instantiation using useFormik hook

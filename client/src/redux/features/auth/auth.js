@@ -1,21 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
+import { createSlice,createAsyncThunk, } from "@reduxjs/toolkit";
+import axios from "axios";
+
+
+export const registerUser = createAsyncThunk(
+  '/get/Apic',
+  async (values)  => {
+    const config = {
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }
+    const {name, email, password} = values
+
+    const body = JSON.stringify({name, email, password});
+    const res = await axios.post("/api/users", body, config);
+    const response = {msg:res.data.message,values}
+    return response;
+  }
+)
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isAuthenticated: null,
+    isAuthenticated: false,
     loading: true,
-    user: null,
+    user: {},
+    message:''
+   
   },
+    reducers:{},
+    extraReducers: {
+      
+        [registerUser.fulfilled]: (state, action) => {
+          state.isAuthenticated=true;
+          state.loading=false;
+          state.user = action.payload.values;
+          state.message = action.payload.msg
+         
+        }
 
-  reducers: {
-    register_success: (state, values) => {
-      state.user = true;
-      console.log(values);
-    },
-  },
+  }
 });
 
-export const { register_success } = authSlice.actions;
+// export const  registerUser  = authSlice.actions;
 export default authSlice.reducer;

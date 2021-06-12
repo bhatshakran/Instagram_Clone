@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { register_success } from "../redux/features/auth/auth";
+// import { register_success } from "../redux/features/auth/auth";
 
 const Login = () => {
   const count = useSelector((state) => state.auth.user);
   console.log(count);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const loginHandler = (e) => {
     e.preventDefault();
-    dispatch(register_success());
+    // dispatch(register_success());
   };
   return (
     <React.Fragment>
