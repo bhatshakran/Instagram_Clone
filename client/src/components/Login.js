@@ -5,8 +5,8 @@ import { AiFillFacebook } from "react-icons/ai";
 const Login = () => {
   return (
     <React.Fragment>
-      <div className="mx-auto mt-8 card  border card border-gray-200">
-        <h1 className="pt-6 font-grand-hotel text-5xl text-center">
+      <div className="mx-auto mt-8 border border-gray-200 card">
+        <h1 className="pt-6 text-5xl text-center font-grand-hotel">
           Instagram
         </h1>
         <form action="" className="grid grid-cols-1 mt-4">
@@ -27,24 +27,24 @@ const Login = () => {
           <input
             type="submit"
             value="Login"
-            className="cursor-pointer mx-auto mt-4 bg-blue-300 text-white w-3/4 py-1 rounded-sm hover:bg-blue-600"
+            className="w-3/4 py-1 mx-auto mt-4 text-white bg-blue-300 rounded-sm cursor-pointer hover:bg-instablue-default"
           />
 
           <div className="mt-4 text-center text-gray-500">OR</div>
-          <div className="  font-medium mt-5 text-md flex items-center justify-center text-blue-900">
+          <div className="flex items-center justify-center mt-5 font-medium text-blue-900 text-md">
             <AiFillFacebook className="text-xl" />
             <Link to="/" className="text-center">
               Log in with Facebook
             </Link>
           </div>
-          <div className="text-sm text-center mt-3 text-blue-900">
+          <div className="mt-3 text-sm text-center text-blue-900">
             <Link to="/">Forgot Password?</Link>
           </div>
         </form>
       </div>
-      <div className="border border-gray-200 mt-3 smallcard mx-auto flex items-center text-sm justify-center">
+      <div className="flex items-center justify-center mx-auto mt-3 text-sm border border-gray-200 smallcard">
         <span className="font-light ">Don't have an account?</span>
-        <Link to="/" className="text-blue-900 ml-2">
+        <Link to="/signup" className="ml-2 text-blue-900">
           Signup
         </Link>
       </div>

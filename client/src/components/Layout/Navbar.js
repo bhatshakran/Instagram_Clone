@@ -7,22 +7,31 @@ import { FaUserPlus, FaUserCircle } from "react-icons/fa";
 const Navbar = () => {
   return (
     <nav className="w-full flex items-center justify-between py-3 px-3.5 border-b border-gray-200">
-      <div className="nav-brand text-3xl font-grand-hotel ">
+      <div className="text-3xl nav-brand font-grand-hotel ">
         <Link to="/">Instagram</Link>
       </div>
-      <ul className="nav-items flex items-center gap-4 ">
-        <li className="nav-item cursor-pointer text-xl">
-            <Link  to ='/'> <AiFillHome /></Link>
-         
+      <ul className="flex items-center gap-4 nav-items ">
+        <li className="text-xl cursor-pointer nav-item">
+          <Link to="/">
+            {" "}
+            <AiFillHome />
+          </Link>
         </li>
-        <li className="nav-item cursor-pointer text-xl">
-         <Link to='/login'><RiLoginCircleFill /></Link> 
+        <li className="text-xl cursor-pointer nav-item">
+          <Link to="/login">
+            <RiLoginCircleFill />
+          </Link>
         </li>
-        <li className="nav-item cursor-pointer text-xl">
-          <Link to='/register'><FaUserPlus /></Link>
+        <li className="text-xl cursor-pointer nav-item">
+          <Link to="/signup">
+            <FaUserPlus />
+          </Link>
         </li>
-        <li className="nav-item cursor-pointer text-xl">
-         <Link to='/profile'> <FaUserCircle /></Link>
+        <li className="text-xl cursor-pointer nav-item">
+          <Link to="/profile">
+            {" "}
+            <FaUserCircle />
+          </Link>
         </li>
       </ul>
     </nav>

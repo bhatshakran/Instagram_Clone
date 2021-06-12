@@ -6,6 +6,11 @@ module.exports = {
       fontFamily: {
         "grand-hotel": ["Grand Hotel", "cursive"],
       },
+      colors: {
+        instablue: {
+          default: "#0095f6",
+        },
+      },
     },
   },
   variants: {
