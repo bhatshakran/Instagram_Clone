@@ -10,9 +10,9 @@ export const authSlice = createSlice({
   },
 
   reducers: {
-    register_success: (state, name, email, password) => {
+    register_success: (state, values) => {
       state.user = true;
-      console.log(name);
+      console.log(values);
     },
   },
 });
