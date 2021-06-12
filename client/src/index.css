@@ -12,7 +12,7 @@
 @layer utilities{
     .card{
         width:350px;
-        height:380px
+        min-height:380px
     }
     .smallcard{
         width:350px;

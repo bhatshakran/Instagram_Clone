@@ -1,18 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
+import { useSelector } from "react-redux";
+
 
 import SignupForm from "./SignupForm";
 
 const Signup = () => {
-  
+  let msg = useSelector((state) => state.users.message);
 
-  
+  const getMsg = (val) => {
+    console.log(val);
+  };
 
-  
   return (
     <React.Fragment>
+      
       <div className="mx-auto mt-8 border border-gray-200 largecard">
+      {( msg !== '' )? <div className='w-full mt-2 mb-2 text-white bg-blue-500'>{msg}</div>: ""}
         <h1 className="pt-6 text-5xl text-center font-grand-hotel">
           Instagram
         </h1>
@@ -26,7 +31,7 @@ const Signup = () => {
           </Link>
         </div>
         <div className="mt-4 text-center text-gray-500">OR</div>
-        <SignupForm />
+        <SignupForm getMsg={getMsg} />
       </div>
       <div className="flex items-center justify-center mx-auto mt-3 text-sm border border-gray-200 smallcard">
         <span>Have an account?</span>
@@ -34,6 +39,7 @@ const Signup = () => {
           Login
         </Link>
       </div>
+      
     </React.Fragment>
   );
 };
