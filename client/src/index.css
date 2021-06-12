@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    .form-control{
+        @apply w-3/4 px-2 py-2 mx-auto mt-2 text-sm border border-gray-200 rounded-sm focus:outline-none focus:border-gray-300 bg-gray-50;
+    }
+}
+
+@layer utilities{
+    .card{
+        width:350px;
+        height:380px
+    }
+    .smallcard{
+        width:350px;
+        height:65px
+    }
+    .largecard{
+        width:350px;
+        height:520px
+    }
+    .maincontainer{
+        width:614px;
+    }
+
+    .postcard{
+        height:987px;
+    }
+
+    .top{
+        height:60px;
+    }
+
+    .medium{
+        height:750px;
+    }
+    .fill{
+        max-height:750px;
+    }
+
+    .bottom{
+        height:177px;
+    }
+    @media  (max-width:350px){
+        .card, .smallcard, .largecard{
+            width:95vw;      
+        }
+    }
+    
+}
