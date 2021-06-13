@@ -1,26 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
+import { uploadPic } from "../../redux/features/posts/posts";
+import { useDispatch } from "react-redux";
 
 const AddpostForm = () => {
+  const [myfile, setMyfile] = useState([]);
+    const dispatch = useDispatch();
   // validate the add post form
   const validate = (values) => {
     const errors = {};
-    if (!values.title) {
-      errors.title = "Title is required";
-    }
-    if (!values.body) {
-      errors.body = "Caption is required";
-    }
+    // if (!values.title) {
+    //   errors.title = "Title is required";
+    // }
+    // if (!values.body) {
+    //   errors.body = "Caption is required";
+    // }
 
-    if (!values.file) {
-      errors.file = "Please upload a pic";
+    // validate file
+    if(myfile.length === 0){
+      errors.file = 'Please select a pic'
     }
+    
 
     return errors;
   };
 
-  const onSubmit = (values) => {
-    console.log(JSON.stringify(values));
+  const onSubmit = () => {
+    console.log('submitted')
+   
+    dispatch(uploadPic(myfile));
+  };
+
+  const fileHandler = (e) => {
+  
+    console.log(e.target.files[0]);
+    console.log(typeof e.target.files[0]);
+    setMyfile(e.target.files[0]);
   };
 
   const formik = useFormik({
@@ -69,8 +84,7 @@ const AddpostForm = () => {
           type="file"
           name="file"
           id="file"
-          onChange={formik.handleChange}
-          value={formik.values.file}
+          onChange={fileHandler}     
           className="form-control"
         />
         {formik.errors.file ? (
