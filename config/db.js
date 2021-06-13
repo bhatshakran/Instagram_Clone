@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
-const mongoURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.1tc8t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const config = require("config");
+const db = config.get("mongoURI");
+
 
 // 8LSO18Oh2G3gE0qU
 const connectDB = async () => {
   try {
-    await mongoose.connect(mongoURI, {
+    await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
