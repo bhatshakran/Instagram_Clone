@@ -29,9 +29,17 @@ const Navbar = () => {
         </li>
         {(isAuthenticated !== '')?
          (
+           <React.Fragment>
           <li className= "mt-1 text-xl cursor-pointer nav-item" onClick={logout}>
           <GoSignOut/>
         </li>
+        <li className="text-xl cursor-pointer nav-item">
+        <Link to="/profile">
+          {" "}
+          <FaUserCircle />
+        </Link>
+      </li>
+      </React.Fragment>
          ):(
         <React.Fragment>
           <li className="text-xl cursor-pointer nav-item">
@@ -45,12 +53,7 @@ const Navbar = () => {
               <FaUserPlus />
             </Link>
           </li>
-          <li className="text-xl cursor-pointer nav-item">
-          <Link to="/profile">
-            {" "}
-            <FaUserCircle />
-          </Link>
-        </li>
+          
         </React.Fragment>
          )} 
 

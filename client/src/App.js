@@ -5,6 +5,7 @@ import Homepage from "./components/Home/Homepage";
 import Navbar from "./components/Layout/Navbar";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
+import CreatePost from "./components/Posts/CreatePost";
 import { Redirect } from "react-router-dom";
 
 function App() {
@@ -45,6 +46,16 @@ function App() {
           }}
         />
         <Route path="/signup" component={Signup} />
+        <Route
+          path="/add_post"
+          render={() => {
+            if (!auth) {
+              return <Redirect to="/login" />;
+            } else {
+              return <CreatePost />;
+            }
+          }}
+        />
       </Switch>
     </div>
   );
