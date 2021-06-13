@@ -31,11 +31,11 @@ export const createPost = createAsyncThunk(
 
    
     const setAuthToken = token =>{
-      if(token !== '') {
-        axios.defaults.headers.common['x-auth-token'] = token
-      }else{
-       delete axios.defaults.headers.common['x-auth-token'] 
-    }
+      if (token) {
+        axios.defaults.headers.common["x-auth-token"] = token;
+      } else {
+        delete axios.defaults.headers.common["x-auth-token"];
+      }
     }
 
     if(localStorage.token) {
@@ -72,18 +72,20 @@ export const postSlice = createSlice({
   reducers: {},
   extraReducers: {
     [uploadPic.fulfilled]: (state) => {
-
       state.message = "pic uploaded";
     },
     [createPost.fulfilled]: (state, action) => {
       state.loading = false;
       state.url = action.payload.image;
-      state.message = 'post created';
-      state.post = {name:action.payload.name,title:action.payload.title, body:action.payload.body, image:action.payload.image}
-      console.log(state.post)
-      
+      state.message = "post created";
+      state.post = {
+        name: action.payload.name,
+        title: action.payload.title,
+        body: action.payload.body,
+        image: action.payload.image,
+      };
+      console.log(state.post);
     },
-   
   },
 });
 

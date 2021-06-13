@@ -29,21 +29,18 @@ const AddpostForm = () => {
    
     (async function () {
       console.log("submitted");
-      // upload file to cloudinary
-     const res =  await dispatch(uploadPic( myfile));
-     const link = res.payload.url;
-    //  create post, send post request to backend
-    const {title, body} = values;
-    const allData ={
-      title, body, link
-
-    }
-     dispatch(createPost(allData));
+      // upload image to cloudinary
+      const res = await dispatch(uploadPic(myfile));
+      const link = res.payload.url;
+      //  create post, send post request to backend
+      const { title, body } = values;
+      const allData = {
+        title,
+        body,
+        link,
+      };
+      dispatch(createPost(allData));
     })();
-    
-   
-
-   
   };
 
   const fileHandler = (e) => {

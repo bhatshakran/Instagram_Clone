@@ -57,6 +57,9 @@
     }
 
     @media (max-width:500px){
+        .postcard{
+            height: 637px;
+        }
         .medium{
             height:400px;
         }
