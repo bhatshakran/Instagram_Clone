@@ -1,4 +1,3 @@
 {
-  "mongoURI": "mongodb+srv://shaqran:Munazah668@cluster0.1tc8t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   "jwtToken": "mysec2re4t9tok1e0n"
 }
