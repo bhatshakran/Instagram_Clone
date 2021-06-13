@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://60c603df39774d00084908f3--confident-allen-431ccc.netlify.app/",
+  "proxy": "https://fierce-taiga-16927.herokuapp.com/",
   "dependencies": {
     "@craco/craco": "^5.8.0",
     "@reduxjs/toolkit": "^1.6.0",
