@@ -44,10 +44,35 @@
     .bottom{
         height:177px;
     }
+    @media (max-width:650px){
+        .postcard {
+            width: 100vw;          
+             
+        }
+       
+           
+        .maincontainer{
+            width: 100vw;
+        }
+    }
+
+    @media (max-width:500px){
+        .medium{
+            height:400px;
+        }
+        .fill{
+            height:400px;
+        }
+    }
+
     @media  (max-width:350px){
         .card, .smallcard, .largecard{
             width:95vw;      
         }
+        
+        
     }
+
+   
     
 }
