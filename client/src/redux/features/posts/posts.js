@@ -16,24 +16,74 @@ export const uploadPic = createAsyncThunk("/cloudinary", async (file) => {
   }
 });
 
+export const createPost = createAsyncThunk(
+  "/api/posts",
+  async (data) => {
+    
+   
+   
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+        
+      },
+    };
+
+   
+    const setAuthToken = token =>{
+      if(token !== '') {
+        axios.defaults.headers.common['x-auth-token'] = token
+      }else{
+       delete axios.defaults.headers.common['x-auth-token'] 
+    }
+    }
+
+    if(localStorage.token) {
+      setAuthToken(localStorage.token)
+  }
+   
+
+   
+    const { title, body, link  } = data;
+
+    const dataa = JSON.stringify({title, body, link });
+    console.log(dataa)
+
+    try {
+      
+      const res = await axios.post("/api/posts", dataa, config);
+      return res.data;
+    } catch (err) {
+      console.error(err);
+      console.log("Failed");
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: "posts",
   initialState: {
     url: "",
     loading: true,
     message: "",
+    post: {},
   },
 
   reducers: {},
   extraReducers: {
-    [uploadPic.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.url = action.payload.url;
+    [uploadPic.fulfilled]: (state) => {
+
       state.message = "pic uploaded";
     },
-    [uploadPic.rejected]: (error) => {
-      console.log(error);
+    [createPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.url = action.payload.image;
+      state.message = 'post created';
+      state.post = {name:action.payload.name,title:action.payload.title, body:action.payload.body, image:action.payload.image}
+      console.log(state.post)
+      
     },
+   
   },
 });
 

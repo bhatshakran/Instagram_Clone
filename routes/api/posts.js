@@ -15,6 +15,7 @@ router.post(
     [
       check("title", "Title is required").not().isEmpty(),
       check("body", "Body is required").not().isEmpty(),
+      check("link", "Link is required").not().isEmpty(),
     ],
   ],
   async (req, res) => {
@@ -29,6 +30,7 @@ router.post(
       const newPost = new Post({
         title: req.body.title,
         body: req.body.body,
+        image: req.body.link,
         name: user.name,
         postedBy: user.id,
       });

@@ -7,6 +7,7 @@ import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import CreatePost from "./components/Posts/CreatePost";
 import { Redirect } from "react-router-dom";
+import Bottombar from "./components/Layout/Bottombar";
 
 function App() {
   let token = useSelector((state) => state.auth);
@@ -57,6 +58,7 @@ function App() {
           }}
         />
       </Switch>
+      {auth ? <Bottombar /> : ""}
     </div>
   );
 }

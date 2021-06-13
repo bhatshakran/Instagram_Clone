@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { uploadPic } from "../../redux/features/posts/posts";
+import { createPost, uploadPic } from "../../redux/features/posts/posts";
 import { useDispatch } from "react-redux";
 
 const AddpostForm = () => {
@@ -9,12 +9,12 @@ const AddpostForm = () => {
   // validate the add post form
   const validate = (values) => {
     const errors = {};
-    // if (!values.title) {
-    //   errors.title = "Title is required";
-    // }
-    // if (!values.body) {
-    //   errors.body = "Caption is required";
-    // }
+    if (!values.title) {
+      errors.title = "Title is required";
+    }
+    if (!values.body) {
+      errors.body = "Caption is required";
+    }
 
     // validate file
     if(myfile.length === 0){
@@ -25,16 +25,28 @@ const AddpostForm = () => {
     return errors;
   };
 
-  const onSubmit = () => {
-    console.log('submitted')
+  const onSubmit = (values) => {
    
-    dispatch(uploadPic(myfile));
+    (async function () {
+      console.log("submitted");
+      // upload file to cloudinary
+     const res =  await dispatch(uploadPic( myfile));
+     const link = res.payload.url;
+    //  create post, send post request to backend
+    const {title, body} = values;
+    const allData ={
+      title, body, link
+
+    }
+     dispatch(createPost(allData));
+    })();
+    
+   
+
+   
   };
 
   const fileHandler = (e) => {
-  
-    console.log(e.target.files[0]);
-    console.log(typeof e.target.files[0]);
     setMyfile(e.target.files[0]);
   };
 
