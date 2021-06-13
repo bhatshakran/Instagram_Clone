@@ -6,7 +6,7 @@
   "author": "BHAT SHAQRAN",
   "license": "MIT",
   "scripts": {
-    "start": "node server",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
