@@ -2,7 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://fierce-taiga-16927.herokuapp.com/",
   "dependencies": {
     "@craco/craco": "^5.8.0",
     "@reduxjs/toolkit": "^1.6.0",
@@ -47,5 +46,6 @@
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.4"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
