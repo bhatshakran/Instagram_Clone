@@ -1,5 +1,5 @@
 import React from "react";
-import emo from "../images/emo.jpeg";
+import emo from "../../images/emo.jpeg";
 
 const Postcard = () => {
   return (

@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import Homepage from "./components/Homepage";
+import Homepage from "./components/Home/Homepage";
 import Navbar from "./components/Layout/Navbar";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import Login from "./components/Auth/Login";
+import Signup from "./components/Auth/Signup";
 import { Redirect } from "react-router-dom";
 
 function App() {

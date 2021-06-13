@@ -4,18 +4,16 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/features/auth/auth";
+import { loginUser } from "../../redux/features/auth/auth";
 import { useHistory } from "react-router";
 
 const LoginForm = () => {
-  const history = useHistory()
-  const auth = useSelector(state => state.auth);
-
-  
+  const history = useHistory();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (auth.isAuthenticated) {   
-      history.push('/');
+    if (auth.isAuthenticated) {
+      history.push("/");
     }
   }, [auth.isAuthenticated]);
 
@@ -41,7 +39,6 @@ const LoginForm = () => {
 
   const onSubmit = (values) => {
     dispatch(loginUser(values));
-    
   };
 
   const formik = useFormik({

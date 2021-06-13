@@ -1,5 +1,5 @@
 import React from "react";
-import Postcard from "./Postcard";
+import Postcard from "../Posts/Postcard";
 
 const Homepage = () => {
   return (
