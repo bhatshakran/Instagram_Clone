@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 /node_modules
 .env
 .vscode
-=======
-.env
-node_modules/
-
 config/default.json
->>>>>>> 04b4c873f1c5bac82b9507908d2dbbe29c3489e4
