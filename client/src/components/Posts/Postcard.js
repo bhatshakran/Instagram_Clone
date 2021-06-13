@@ -1,19 +1,17 @@
 import React from "react";
-import emo from "../../images/emo.jpeg";
 
-const Postcard = () => {
-  return (
-    <div className="mb-4 border border-gray-200 rounded-sm shadow-sm postcard">
+const Postcard = ({ image, name, title, body }) => {  return (
+    <div className="pb-4 mb-4 border border-gray-200 rounded-sm shadow-sm postcard">
       <div className="px-16 pt-1 border-b top">
         <h4>
-          <strong>sweetdictions</strong>
+          <strong>{name}</strong>
         </h4>
         <h5>
-          <small>Soura, Srinagar,JK</small>
+          <small>{title}</small>
         </h5>
       </div>
       <div className="medium">
-        <img src={emo} alt="" className="mx-auto my-2 fill" />
+        <img src={image} alt="" className="mx-auto my-2 fill" />
       </div>
       <div className="pt-2 maincontainer">
         <div className="flex items-center ml-3 icons">
@@ -63,11 +61,11 @@ const Postcard = () => {
           </svg>
         </div>
         <div className="flex items-center gap-2 mt-6 ml-3 text-sm">
-          <strong>sweetdictions</strong>
-          <p>Hey yo i am chillin!!!</p>
+          <strong>{name}</strong>
+          <p>{body}</p>
         </div>
         {/* comments */}
-        <div className="ml-4 text-gray-500">View all comments</div>
+        <div className="ml-4 text-gray-500 ">View all comments</div>
         <div>
           <div className="flex items-center gap-1 ml-4 text-sm name">
             <strong>v.lee87</strong>

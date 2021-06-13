@@ -1,17 +1,29 @@
 import React, { useEffect } from "react";
 import Postcard from "../Posts/Postcard";
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../redux/features/posts/posts";
 
 const Homepage = () => {
+  const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch()
   
   useEffect(()=> {
     dispatch(getAllPosts())
   }, [])
+
   return (
     <div className="mx-auto mt-5 maincontainer">
-      <Postcard />
+      {posts.map((post) => {
+        return (
+          <Postcard
+            image={post.image}
+            name={post.name}
+            body={post.body}
+            title={post.title}
+            key={post._id}
+          />
+        );
+      })}
     </div>
   );
 };

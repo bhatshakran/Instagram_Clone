@@ -107,7 +107,7 @@ export const postSlice = createSlice({
     [createPost.fulfilled]: (state, action) => {
       state.loading = false;
       state.url = action.payload.image;
-      state.message = "post created";
+      state.message = "Post created";
       state.post = {
         name: action.payload.name,
         title: action.payload.title,
@@ -116,8 +116,9 @@ export const postSlice = createSlice({
       };
       console.log(state.post);
     },
-    [getAllPosts.fulfilled]: (state) => {
+    [getAllPosts.fulfilled]: (state, action) => {
       state.message = "posts fetched";
+      state.posts = action.payload;
     },
   },
 });

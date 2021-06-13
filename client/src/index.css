@@ -27,7 +27,7 @@
     }
 
     .postcard{
-        height:987px;
+        max-height:987px;
     }
 
     .top{
@@ -35,7 +35,7 @@
     }
 
     .medium{
-        height:750px;
+        max-height:750px;
     }
     .fill{
         max-height:750px;
@@ -58,7 +58,7 @@
 
     @media (max-width:500px){
         .postcard{
-            height: 637px;
+            min-height: 637px;
         }
         .medium{
             height:400px;
