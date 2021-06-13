@@ -1,22 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 
-
 const Login = () => {
-  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  
+
   return (
     <React.Fragment>
       <div className="mx-auto mt-8 border border-gray-200 card">
-        {isAuthenticated ? (
-          <div className="w-full mt-2 mb-2 text-white bg-blue-500">
-            Logged In
-          </div>
-        ) : (
-          ""
-        )}
         <h1 className="pt-6 text-5xl text-center font-grand-hotel">
           Instagram
         </h1>

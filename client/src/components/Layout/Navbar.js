@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { FaUserPlus, FaUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  // let isAuthenticated = useSelector((state) => state.auth.token);
   return (
     <nav className="w-full flex items-center justify-between py-3 px-3.5 border-b border-gray-200">
       <div className="text-3xl nav-brand font-grand-hotel ">
@@ -17,20 +19,33 @@ const Navbar = () => {
             <AiFillHome />
           </Link>
         </li>
-        <li className="text-xl cursor-pointer nav-item">
+        {/* {(isAuthenticated !== null)? '':( */}
+          <React.Fragment>
+          <li className="text-xl cursor-pointer nav-item">
           <Link to="/login">
             <RiLoginCircleFill />
           </Link>
         </li>
-        <li className="text-xl cursor-pointer nav-item">
-          <Link to="/signup">
-            <FaUserPlus />
-          </Link>
-        </li>
+        
+         <li className="text-xl cursor-pointer nav-item">
+         <Link to="/signup">
+           <FaUserPlus />
+         </Link>
+       </li>
+       </React.Fragment>
+        {/* )} */}
+        
+       
         <li className="text-xl cursor-pointer nav-item">
           <Link to="/profile">
             {" "}
             <FaUserCircle />
+          </Link>
+        </li>
+        <li className="text-xl cursor-pointer nav-item">
+          <Link to="/logout">
+            {" "}
+          Logout
           </Link>
         </li>
       </ul>

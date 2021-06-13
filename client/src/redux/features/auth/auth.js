@@ -19,19 +19,21 @@ export const loginSlice = createSlice({
   name: "auth",
   initialState: {
     loading: true,
+    token: localStorage.getItem('token')?localStorage.getItem('token'):'',
     isAuthenticated: false,
-    token: "",
     user: {},
     message: "",
   },
   reducers: {},
   extraReducers: {
-    [loginUser.fulfilled]: (state, action) => {
-      console.log("done");
+    [loginUser.fulfilled]: (state, action) => {    
+      
+       localStorage.setItem('token', action.payload.data.token); 
+       state.token = action.payload.data.token;
       state.isAuthenticated = true;
       state.loading = false;
-      state.token = action.payload.data.token;
       state.user = action.payload.values;
+      
       //   state.message = action.payload.msg;
     },
   },

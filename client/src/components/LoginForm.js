@@ -1,11 +1,25 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/features/auth/auth";
+import {  loginUser } from "../redux/features/auth/auth";
+import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const LoginForm = () => {
+  const history = useHistory()
+  const auth = useSelector(state => state.auth);
+
+  
+
+  useEffect(() => {
+    if (auth.isAuthenticated) {   
+      history.push('/');
+    }
+  }, [auth.isAuthenticated]);
+
   const dispatch = useDispatch();
   // Validate form values
   const validate = (values) => {
@@ -27,8 +41,8 @@ const LoginForm = () => {
   };
 
   const onSubmit = (values) => {
-    console.log(values);
     dispatch(loginUser(values));
+    
   };
 
   const formik = useFormik({
