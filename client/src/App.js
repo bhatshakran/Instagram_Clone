@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Homepage from "./components/Homepage";
 import Navbar from "./components/Layout/Navbar";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 
 function App() {
-  
   let token = useSelector((state) => state.auth);
-  console.log(token)
-  // let actoken = token.token;
+
   let auth;
-  if(token.token !== ''){
-    auth = true
-  }else {
-    auth = false
-    console.log('not auth')
+  if (token.token !== "") {
+    auth = true;
+  } else {
+    auth = false;
+    console.log("not auth");
   }
-  
+
   // const auth = true;
-  return (  
+  return (
     <div className="mx-auto App lg:container">
       <Navbar />
       <Switch>
@@ -36,14 +34,15 @@ function App() {
             }
           }}
         />
-        <Route path="/login" 
-        render={() => {
-          if (auth) {
-            return < Redirect to = '/' />;
-          } else {
-            return <Login />;
-          }
-        }}
+        <Route
+          path="/login"
+          render={() => {
+            if (auth) {
+              return <Redirect to="/" />;
+            } else {
+              return <Login />;
+            }
+          }}
         />
         <Route path="/signup" component={Signup} />
       </Switch>

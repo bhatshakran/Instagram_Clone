@@ -1,11 +1,10 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import {  loginUser } from "../redux/features/auth/auth";
-import { Redirect } from "react-router-dom";
+import { loginUser } from "../redux/features/auth/auth";
 import { useHistory } from "react-router";
 
 const LoginForm = () => {

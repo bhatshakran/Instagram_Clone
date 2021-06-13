@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 
 const Login = () => {
-
   return (
     <React.Fragment>
       <div className="mx-auto mt-8 border border-gray-200 card">

@@ -2,11 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { RiLoginCircleFill } from "react-icons/ri";
+import {GoSignOut} from 'react-icons/go'
 import { FaUserPlus, FaUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../redux/features/auth/auth";
 
 const Navbar = () => {
-  // let isAuthenticated = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+  let isAuthenticated = useSelector((state) => state.auth.token);
+
+  const logout = () => {
+    console.log("working");
+    dispatch(logoutUser());
+  };
   return (
     <nav className="w-full flex items-center justify-between py-3 px-3.5 border-b border-gray-200">
       <div className="text-3xl nav-brand font-grand-hotel ">
@@ -19,35 +27,35 @@ const Navbar = () => {
             <AiFillHome />
           </Link>
         </li>
-        {/* {(isAuthenticated !== null)? '':( */}
-          <React.Fragment>
-          <li className="text-xl cursor-pointer nav-item">
-          <Link to="/login">
-            <RiLoginCircleFill />
-          </Link>
+        {(isAuthenticated !== '')?
+         (
+          <li className= "mt-1 text-xl cursor-pointer nav-item" onClick={logout}>
+          <GoSignOut/>
         </li>
-        
-         <li className="text-xl cursor-pointer nav-item">
-         <Link to="/signup">
-           <FaUserPlus />
-         </Link>
-       </li>
-       </React.Fragment>
-        {/* )} */}
-        
-       
-        <li className="text-xl cursor-pointer nav-item">
+         ):(
+        <React.Fragment>
+          <li className="text-xl cursor-pointer nav-item">
+            <Link to="/login">
+              <RiLoginCircleFill />
+            </Link>
+          </li>
+
+          <li className="text-xl cursor-pointer nav-item">
+            <Link to="/signup">
+              <FaUserPlus />
+            </Link>
+          </li>
+          <li className="text-xl cursor-pointer nav-item">
           <Link to="/profile">
             {" "}
             <FaUserCircle />
           </Link>
         </li>
-        <li className="text-xl cursor-pointer nav-item">
-          <Link to="/logout">
-            {" "}
-          Logout
-          </Link>
-        </li>
+        </React.Fragment>
+         )} 
+
+       
+       
       </ul>
     </nav>
   );
