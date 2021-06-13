@@ -7,10 +7,16 @@ export const uploadPic = createAsyncThunk("/cloudinary", async (file) => {
   let formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", "insta_clone");
+  delete axios.defaults.headers.common["x-auth-token"];
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
   const url = `https://api.cloudinary.com/v1_1/duuo1ctgy/image/upload`;
   try {
-    const res = await axios.post(url, formData);
+    const res = await axios.post(url, formData, config);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -106,7 +112,6 @@ export const postSlice = createSlice({
     },
     [createPost.fulfilled]: (state, action) => {
       state.loading = false;
-      state.url = action.payload.image;
       state.message = "Post created";
       state.post = {
         name: action.payload.name,
