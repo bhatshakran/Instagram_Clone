@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
+// upload picture to cloudinary action
 export const uploadPic = createAsyncThunk("/cloudinary", async (file) => {
   let formData = new FormData();
   formData.append("file", file);
@@ -16,6 +18,8 @@ export const uploadPic = createAsyncThunk("/cloudinary", async (file) => {
   }
 });
 
+
+// Create post action
 export const createPost = createAsyncThunk(
   "/api/posts",
   async (data) => {
@@ -60,6 +64,31 @@ export const createPost = createAsyncThunk(
   }
 );
 
+// Get all posts
+export const getAllPosts = createAsyncThunk("getposts", async () =>{
+
+  const setAuthToken = token =>{
+    if (token) {
+      axios.defaults.headers.common["x-auth-token"] = token;
+    } else {
+      delete axios.defaults.headers.common["x-auth-token"];
+    }
+  }
+
+  if(localStorage.token) {
+    setAuthToken(localStorage.token)
+}
+
+try {
+  const res = await axios.get('/api/posts' )
+  return res.data;
+} catch (err) {
+  console.error(err);
+      console.log("Failed to get posts!");
+}
+})
+
+
 export const postSlice = createSlice({
   name: "posts",
   initialState: {
@@ -67,6 +96,7 @@ export const postSlice = createSlice({
     loading: true,
     message: "",
     post: {},
+    posts: [],
   },
 
   reducers: {},
@@ -85,6 +115,9 @@ export const postSlice = createSlice({
         image: action.payload.image,
       };
       console.log(state.post);
+    },
+    [getAllPosts.fulfilled]: (state) => {
+      state.message = "posts fetched";
     },
   },
 });
