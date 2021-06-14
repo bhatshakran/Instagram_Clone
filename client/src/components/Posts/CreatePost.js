@@ -1,16 +1,23 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
-import {Link} from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
 import { hideAlert } from "../../utils/hideAlert";
 import AddpostForm from "../Forms/AddpostForm";
 import Loading from "../../utils/Loading";
+import { clearAlertMsg } from "../../redux/features/posts/posts";
 
 
 const CreatePost = () => {
+ const dispatch = useDispatch();
   const loading = useSelector(state => state.posts.loading)
   let alertRef = useRef(null)
   const alert = useSelector((state) => state.posts.alertMessage);
   console.log(loading)
+
+  const clearstatemsg = () => {
+    setTimeout(() => {
+      dispatch(clearAlertMsg());
+    }, 2000);
+  };
 
   if(loading){
    return  <div className="flex items-center justify-center h-screen ">
@@ -26,15 +33,12 @@ const CreatePost = () => {
               className="py-4 text-center text-white bg-blue-300"
             >
               {alert} {hideAlert(alertRef)}
-              <Link to="/" className="text-black ">
-                View Posts
-              </Link>
+              {clearstatemsg()}
             </div>
           ) : (
             ""
           )}
           <AddpostForm />
-          
         </div>
       </div>
     );

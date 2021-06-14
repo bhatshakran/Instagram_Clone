@@ -1,5 +1,5 @@
-export const hideAlert = (ref, timeout = 6000) => {
+export const hideAlert = (ref, timeout = 2000) => {
   setTimeout(() => {
-    ref.current.style.display = "none";
+    if (ref.current !== null) ref.current.style.display = "none";
   }, timeout);
 };

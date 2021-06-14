@@ -95,6 +95,8 @@ try {
 })
 
 
+
+
 export const postSlice = createSlice({
   name: "posts",
   initialState: {
@@ -103,31 +105,36 @@ export const postSlice = createSlice({
     message: "",
     post: {},
     posts: [],
-    alertMessage: ''
+    alertMessage: "",
   },
 
-  reducers: {},
+  reducers: {
+    clearAlertMsg: (state) => {
+      state.alertMessage = "";
+    },
+  },
   extraReducers: {
-    [uploadPic.pending]:state =>{
+    [uploadPic.pending]: (state) => {
       state.loading = true;
     },
     [uploadPic.fulfilled]: (state) => {
       state.message = "pic uploaded";
+     
     },
-    [createPost.pending]:state =>{
+    [createPost.pending]: (state) => {
       state.loading = true;
     },
     [createPost.fulfilled]: (state, action) => {
       state.loading = false;
       state.message = "Post created";
-      state.alertMessage = 'Post uploaded'
+      state.alertMessage = "Post uploaded";
       state.post = {
         name: action.payload.name,
         title: action.payload.title,
         body: action.payload.body,
         image: action.payload.image,
       };
-      console.log(state.post);
+      
     },
     [getAllPosts.fulfilled]: (state, action) => {
       state.message = "posts fetched";
@@ -135,5 +142,6 @@ export const postSlice = createSlice({
     },
   },
 });
+export const { clearAlertMsg } = postSlice.actions;
 
 export default postSlice.reducer;
