@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { createPost, uploadPic } from "../../redux/features/posts/posts";
 import { useDispatch } from "react-redux";
+import imageCompression from "browser-image-compression";
 
 const AddpostForm = () => {
   const [myfile, setMyfile] = useState([]);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // validate the add post form
   const validate = (values) => {
     const errors = {};
@@ -17,21 +18,42 @@ const AddpostForm = () => {
     }
 
     // validate file
-    if(myfile.length === 0){
-      errors.file = 'Please select a pic'
+    if (myfile.length === 0) {
+      errors.file = "Please select a pic";
     }
-    
 
     return errors;
   };
 
   const onSubmit = (values) => {
-   
     (async function () {
-      console.log("submitted");
+      console.log('Compression started')
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+  let compressedFile ;
+      try {
+         compressedFile = await imageCompression(myfile, options);
+      
+        console.log(
+          "compressedFile instanceof Blob",
+          compressedFile instanceof Blob
+        ); // true
+        console.log(
+          `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+        );
+   
+      } catch (err) {
+        console.log(err);
+      }
+      console.log("Compressed");
+      console.log(compressedFile)
       // upload image to cloudinary
-      const res = await dispatch(uploadPic(myfile));
-      const link = res.payload.url;
+      const res = await dispatch(uploadPic(compressedFile));
+      const link = res.payload.secure_url;
+      console.log('Uploaded to Cloudinary')
       //  create post, send post request to backend
       const { title, body } = values;
       const allData = {
@@ -43,8 +65,14 @@ const AddpostForm = () => {
     })();
   };
 
-  const fileHandler = (e) => {
-    setMyfile(e.target.files[0]);
+  // image handler function
+  const fileHandler = async (e) => {
+    const imageFile = e.target.files[0];
+    console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
+    console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+    setMyfile(imageFile);
+
+   
   };
 
   const formik = useFormik({
@@ -92,8 +120,9 @@ const AddpostForm = () => {
         <input
           type="file"
           name="file"
+          accept="image/*"
           id="file"
-          onChange={fileHandler}     
+          onChange={fileHandler}
           className="form-control"
         />
         {formik.errors.file ? (

@@ -103,6 +103,7 @@ export const postSlice = createSlice({
     message: "",
     post: {},
     posts: [],
+    alertMessage: ''
   },
 
   reducers: {},
@@ -113,6 +114,7 @@ export const postSlice = createSlice({
     [createPost.fulfilled]: (state, action) => {
       state.loading = false;
       state.message = "Post created";
+      state.alertMessage = 'Post uploaded'
       state.post = {
         name: action.payload.name,
         title: action.payload.title,
