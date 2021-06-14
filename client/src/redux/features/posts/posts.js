@@ -99,7 +99,7 @@ export const postSlice = createSlice({
   name: "posts",
   initialState: {
     url: "",
-    loading: true,
+    loading: false,
     message: "",
     post: {},
     posts: [],
@@ -108,8 +108,14 @@ export const postSlice = createSlice({
 
   reducers: {},
   extraReducers: {
+    [uploadPic.pending]:state =>{
+      state.loading = true;
+    },
     [uploadPic.fulfilled]: (state) => {
       state.message = "pic uploaded";
+    },
+    [createPost.pending]:state =>{
+      state.loading = true;
     },
     [createPost.fulfilled]: (state, action) => {
       state.loading = false;
