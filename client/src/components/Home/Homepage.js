@@ -6,6 +6,7 @@ import { getAllPosts } from "../../redux/features/posts/posts";
 const Homepage = () => {
 
   const posts = useSelector((state) => state.posts.posts);
+  console.log(Object.values(posts));
 
   const dispatch = useDispatch();
 
@@ -16,7 +17,7 @@ const Homepage = () => {
 
   return (
     <div className="mx-auto mt-5 maincontainer">
-      {posts.map((post) => {
+      {Object.values(posts).map((post) => {
         return (
           <Postcard
             image={post.image}

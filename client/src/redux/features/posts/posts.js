@@ -150,7 +150,7 @@ export const postSlice = createSlice({
     post: {},
     posts: [],
     alertMessage: "",
-    likesOfPost:  [],
+    likesOfPost: [],
   },
 
   reducers: {
