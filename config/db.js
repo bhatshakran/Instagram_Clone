@@ -1,20 +1,17 @@
 const mongoose = require("mongoose");
 // const config = require("config");
 // const db = config.get("mongoURI");
-require("dotenv").config();
-// const uri = process.env.mongoURI;
+
+const uri = process.env.mongoURI;
 
 
 // 8LSO18Oh2G3gE0qU
 const connectDB = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://shaqran:Munazah668@cluster0.1tc8t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("MongoDB connected...");
   } catch (err) {
     console.error(err.message);
