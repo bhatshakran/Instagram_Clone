@@ -1,10 +1,10 @@
-import React, { useRef }  from "react";
+import React, { useRef, useState }  from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLikesById, likePost } from "../../redux/features/posts/posts";
 
 
 const Postcard = ({ image, name, title, body, postid }) => {
- 
+  const[postlikes, setpostlikes] = useState()
   const currentUserID = useSelector((state) => state.posts.user.id)
   const dispatch = useDispatch();
   const heartRef= useRef()
@@ -16,22 +16,35 @@ const Postcard = ({ image, name, title, body, postid }) => {
 
  
 //  check if i have liked the post or not
-const checkIfILiked = async (line='def') =>{
-  const res = await dispatch(getLikesById(postid))
-  const likes = res.payload;
+const checkIfILiked = async () =>{
+ const likes =  await getPostLikes()
  const myLike =  likes.filter(like => like.user === currentUserID);
- return myLike;
+ return {likes,myLike};
  
 }
+
+// get post likes 
+const getPostLikes = async() =>{
+  const res = await dispatch(getLikesById(postid))
+  const likes = res.payload;
+  setpostlikes(likes.length)
+  return likes;
+
+}
+
+
+
+
+
+
 
   
 
   // Like/Unlike Event Listener
   const likeUnlikePost = () => {
     (async function(){
-     let myLike =  await checkIfILiked();
-     console.log(heartRef.current)
-
+     let {myLike,likes} = await checkIfILiked();
+     
     
     if(myLike.length === 0){
       console.log("liking this post now");
@@ -39,9 +52,11 @@ const checkIfILiked = async (line='def') =>{
         id: postid,
         type: "like",
       };
-      dispatch(likePost(data));
+     await dispatch(likePost(data));
+      
       heartRef.current.classList.remove('hollow')
       heartRef.current.classList.add('filled')
+      setpostlikes(likes.length + 1);
       
 
     
@@ -53,13 +68,16 @@ const checkIfILiked = async (line='def') =>{
         id: postid,
         type: "unlike",
       };
-       dispatch(likePost(data));
+       await dispatch(likePost(data));
        heartRef.current.classList.remove('filled')
        heartRef.current.classList.add('hollow')
+       setpostlikes(likes.length - 1);
  
 
     }
+
     })()
+    
      
         
   };
@@ -67,9 +85,9 @@ const checkIfILiked = async (line='def') =>{
 
   // display heart icon
   const displayHeart = async () =>{
-    const res = await checkIfILiked();
+    const {myLike} = await checkIfILiked();
 
-    if(res.length >= 1){
+    if(myLike.length >= 1){
       heartRef.current.classList.remove('hollow')
       heartRef.current.classList.add('filled')
     }else{
@@ -146,7 +164,7 @@ const checkIfILiked = async (line='def') =>{
         </div>
         {/* view likes */}
        <div className='mt-2 ml-3 text-sm font-medium'>
-       {/* Liked by{' '}{likes.length}{' '}people */}
+       Liked by{' '}{postlikes}{' '}people
        </div> 
         <div className="flex items-center gap-2 mt-3 ml-3 text-sm">
           <strong>{name}</strong>

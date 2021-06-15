@@ -24,9 +24,8 @@ const Homepage = () => {
             body={post.body}
             title={post.title}
             postid={post._id}
-            // likes={post.likes}
+            lykes={post.likes}
             key={post._id}
-         
           />
         );
       })}
