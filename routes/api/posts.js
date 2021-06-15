@@ -75,6 +75,20 @@ router.get('/myposts', auth, async(req, res)=>{
     res.status(500).send('Server Error')
   }
 })
+// @route GET api/posts/like/
+//  @desc Get all likes of a post
+// @access Private
+router.get('/like/:id', auth, async(req, res)=>{
+  try {
+    // Get the post first
+    const post = await Post.findById(req.params.id);
+    res.json(post.likes)
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+})
 
 // @route PUT api/posts/like/:id
 //  @desc Like a post

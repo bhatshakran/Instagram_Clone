@@ -10,6 +10,20 @@
 }
 
 @layer utilities{
+    .hollow{
+        @apply w-6 h-6;
+        background-image:url('images/heart.png');
+        background-size:cover;
+        
+        
+    }
+    .filled{
+        @apply w-6 h-6;
+        background-image:url('images/heart_filled.png');
+        background-size:cover;
+        
+        
+    }
     .card{
         width:350px;
         min-height:380px
