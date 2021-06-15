@@ -94,6 +94,35 @@ try {
 }
 })
 
+// Like/Unlike a post
+
+export const likePost = createAsyncThunk('/likeOrUnlike/:id', async(data)=> {
+if(data.type === 'like'){
+  try {
+console.log('type liked: from redux')
+    const res = await axios.put(`/api/posts/like/${data.id}` );
+    return res.data;
+    
+  } catch (err) {
+    console.error(err);
+    console.log("Failed to like the post!");
+  }
+}else if(data.type === 'unlike'){
+  try {
+console.log('type unliked: from redux')
+    const res = await axios.put(`/api/posts/unlike/${data.id}` );
+    return res.data;
+    
+  } catch (err) {
+    console.error(err);
+    console.log("Failed to like the post!");
+  }
+}
+  
+
+
+})
+
 
 
 
@@ -119,7 +148,6 @@ export const postSlice = createSlice({
     },
     [uploadPic.fulfilled]: (state) => {
       state.message = "pic uploaded";
-     
     },
     [createPost.pending]: (state) => {
       state.loading = true;
@@ -134,11 +162,17 @@ export const postSlice = createSlice({
         body: action.payload.body,
         image: action.payload.image,
       };
-      
     },
     [getAllPosts.fulfilled]: (state, action) => {
       state.message = "posts fetched";
-      state.posts = action.payload;
+      state.posts = action.payload.posts;
+      state.user = action.payload.user;
+      
+    },
+
+    [likePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      // state.message = "Post liked";
     },
   },
 });
