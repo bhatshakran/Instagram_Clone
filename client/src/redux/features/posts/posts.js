@@ -115,7 +115,7 @@ console.log('type unliked: from redux')
     
   } catch (err) {
     console.error(err);
-    console.log("Failed to like the post!");
+    console.log("Failed to unlike the post!");
   }
 }
   
@@ -126,9 +126,8 @@ console.log('type unliked: from redux')
 // Get all likes of a post
 export const getLikesById = createAsyncThunk('getLikes', async (id) => {
   try {
-    const res = await axios.get(`/api/posts/like/${id}`);
-  return res.data;
-    
+    let res = await axios.get(`/api/posts/like/${id}`);
+    return res.data;
   } catch (err) {
     console.error(err);
     console.log("Failed to get likes of the post!");
@@ -150,7 +149,7 @@ export const postSlice = createSlice({
     post: {},
     posts: [],
     alertMessage: "",
-    likesOfPost: [],
+    likesOfPost: null,
   },
 
   reducers: {
@@ -191,7 +190,7 @@ export const postSlice = createSlice({
     },
     [getLikesById.fulfilled]: (state, action) => {
       state.loading = false;
-      state.likesOfPost = action.payload;
+      state.likesOfPost = Object.values(action.payload);
     },
   },
 });

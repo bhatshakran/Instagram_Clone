@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const { ObjectId } = Schema.Types;
+const { ObjectId } = mongoose.Schema.Types;
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -21,12 +20,27 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   likes: [
-    {
-      user:{
+    
+      {user:{
         type: ObjectId,
         ref: "user",
+    }
+  }
+  ],
+  comments:[
+    {
+      user:{
+        type:ObjectId,
+        ref:"user"
+      },
+      text:{
+        type:String, 
+        required:true,
+      },
+      name:{
+        type:String
       }
-     
+      
     }
   ],
 

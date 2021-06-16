@@ -106,7 +106,7 @@ router.put("/like/:id", auth, async (req, res) => {
       return res.status(400).json("Post has already been liked!");
     }
 
-    post.likes.unshift({ user: req.user.id });
+    post.likes.push({ user: req.user.id });
 
     await post.save();
     res.json(post.likes);
@@ -123,7 +123,7 @@ router.put("/like/:id", auth, async (req, res) => {
 router.put("/unlike/:id", auth, async (req, res) => {
   try {
     // Get the post first
-    const post = await Post.findById(req.params.id);
+    let post = await Post.findById(req.params.id);
 
     // Check if the post has been liked or not
     if (
@@ -134,12 +134,16 @@ router.put("/unlike/:id", auth, async (req, res) => {
     }
 
     // Get remove index
-    const removeIndex = post.likes.map((like) =>
+    console.log(req.user);
+    const removeIndex = post.likes.map((like) =>{
+         console.log(like.user)
       like.user.toString().indexOf(req.user.id)
+    }
     );
 
     // Splice the likes
     post.likes.splice(removeIndex, 1);
+    //  post =  post.likes.filter(item => item.user.toString() !== req.user.id )
 
     await post.save();
     res.json(post.likes);

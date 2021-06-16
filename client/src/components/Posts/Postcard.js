@@ -4,104 +4,71 @@ import { getLikesById, likePost } from "../../redux/features/posts/posts";
 
 
 const Postcard = ({ image, name, title, body, postid }) => {
-  const[postlikes, setpostlikes] = useState()
-  const currentUserID = useSelector((state) => state.posts.user.id)
+  const [postlikes, setpostlikes] = useState();
+  const currentUserID = useSelector((state) => state.posts.user.id);
   const dispatch = useDispatch();
-  const heartRef= useRef()
+  const heartRef = useRef();
 
+  // get post likes
+  const getPostLikes = async () => {
+    const res = await dispatch(getLikesById(postid));;
+    const likes = res.payload;
+    setpostlikes(likes.length);;
+    return likes;  };
 
-
-
-
-
- 
-//  check if i have liked the post or not
-const checkIfILiked = async () =>{
- const likes =  await getPostLikes()
- const myLike =  likes.filter(like => like.user === currentUserID);
- return {likes,myLike};
- 
-}
-
-// get post likes 
-const getPostLikes = async() =>{
-  const res = await dispatch(getLikesById(postid))
-  const likes = res.payload;
-  setpostlikes(likes.length)
-  return likes;
-
-}
-
-
-
-
-
-
-
-  
+  //  check if i have liked the post or not
+  const checkIfILiked = async () => {
+    const likes = await getPostLikes();
+    const myLike = likes.filter((like) => like.user.toString() === currentUserID);
+    return { likes, myLike };
+  };
 
   // Like/Unlike Event Listener
   const likeUnlikePost = () => {
-    (async function(){
-     let {myLike,likes} = await checkIfILiked();
-     
-    
-    if(myLike.length === 0){
-      console.log("liking this post now");
-      const data = {
-        id: postid,
-        type: "like",
-      };
-     await dispatch(likePost(data));
-      
-      heartRef.current.classList.remove('hollow')
-      heartRef.current.classList.add('filled')
-      setpostlikes(likes.length + 1);
-      
+    (async function () {
+      let { myLike, likes } = await checkIfILiked();
 
-    
-  
-    
-    }else{
-      console.log("unliking now");
-      const data = {
-        id: postid,
-        type: "unlike",
-      };
-       await dispatch(likePost(data));
-       heartRef.current.classList.remove('filled')
-       heartRef.current.classList.add('hollow')
-       setpostlikes(likes.length - 1);
- 
+      if (myLike.length === 0) {
+        console.log("liking this post now");
+        const data = {
+          id: postid,
+          type: "like",
+        };
+        await dispatch(likePost(data));
 
-    }
-
-    })()
-    
-     
-        
+        heartRef.current.classList.remove("hollow");
+        heartRef.current.classList.add("filled");
+        setpostlikes(likes.length + 1);
+      } else {
+        console.log("unliking now");
+        const data = {
+          id: postid,
+          type: "unlike",
+        };
+        await dispatch(likePost(data));
+        heartRef.current.classList.remove("filled");
+        heartRef.current.classList.add("hollow");
+        setpostlikes(likes.length - 1);
+      }
+    })();
   };
 
-
   // display heart icon
-  const displayHeart = async () =>{
-    const {myLike} = await checkIfILiked();
-
-    if(myLike.length >= 1){
-      heartRef.current.classList.remove('hollow')
-      heartRef.current.classList.add('filled')
-    }else{
-      heartRef.current.classList.remove('filled')
-      heartRef.current.classList.add('hollow')
-
+  const displayHeart = async () => {
+    const { myLike } = await checkIfILiked();
+   
+    if (myLike.length >= 1) {
+      heartRef.current.classList.remove("hollow");
+      heartRef.current.classList.add("filled");
+    } else {
+      heartRef.current.classList.remove("filled");
+      heartRef.current.classList.add("hollow");
     }
-  }
+  };
 
-  displayHeart()
-
+  displayHeart();
 
   return (
-
     <div className="pb-4 mb-4 border border-gray-200 rounded-sm shadow-sm postcard">
       <div className="px-16 pt-1 border-b top">
         <h4>
@@ -112,18 +79,12 @@ const getPostLikes = async() =>{
         </h5>
       </div>
       <div className="medium">
-
         <img src={image} alt="" className="mx-auto my-2 fill" />
       </div>
       <div className="pt-2 maincontainer">
         <div className="flex items-center gap-1 ml-3 icons">
           {/* like icon */}
-          <div
-            className="cursor-pointer "
-            
-            onClick={likeUnlikePost}
-          >
-    
+          <div className="cursor-pointer " onClick={likeUnlikePost}>
             <div ref={heartRef} className="w-6 h-6"></div>
           </div>
           {/* comment icon */}
@@ -163,9 +124,9 @@ const getPostLikes = async() =>{
           </div>
         </div>
         {/* view likes */}
-       <div className='mt-2 ml-3 text-sm font-medium'>
-       Liked by{' '}{postlikes}{' '}people
-       </div> 
+        <div className="mt-2 ml-3 text-sm font-medium">
+          Liked by {postlikes} people
+        </div>
         <div className="flex items-center gap-2 mt-3 ml-3 text-sm">
           <strong>{name}</strong>
           <p>{body}</p>
@@ -184,7 +145,8 @@ const getPostLikes = async() =>{
         </div>
       </div>
     </div>
-  )}
+  );
+}
 
 
 export default Postcard;
