@@ -5,6 +5,7 @@ import { getLikesById, likePost } from "../../redux/features/posts/posts";
 
 const Postcard = ({ image, name, title, body, postid }) => {
   const [postlikes, setpostlikes] = useState();
+  console.log(postlikes)
   const currentUserID = useSelector((state) => state.posts.user._id);
   const dispatch = useDispatch();
   const heartRef = useRef();
@@ -55,19 +56,19 @@ const Postcard = ({ image, name, title, body, postid }) => {
   };
 
   // display heart icon
-  // const displayHeart = async () => {
-  //   const { myLike } = await checkIfILiked();
+  const displayHeart = async () => {
+    const { myLike } = await checkIfILiked();
    
-  //   if (myLike.length >= 1) {
-  //     heartRef.current.classList.remove("hollow");
-  //     heartRef.current.classList.add("filled");
-  //   } else {
-  //     heartRef.current.classList.remove("filled");
-  //     heartRef.current.classList.add("hollow");
-  //   }
-  // };
+    if (myLike.length >= 1) {
+      heartRef.current.classList.remove("hollow");
+      heartRef.current.classList.add("filled");
+    } else {
+      heartRef.current.classList.remove("filled");
+      heartRef.current.classList.add("hollow");
+    }
+  };
 
-  // displayHeart();
+  displayHeart();
   useEffect( ()=>{
      getPostLikes();
   }, [])
