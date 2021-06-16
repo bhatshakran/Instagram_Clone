@@ -1,3 +1,4 @@
+var compression = require("compression");
 const express = require("express");
 const app = express();
 const connectDB = require("./config/db");
@@ -7,9 +8,23 @@ const path = require("path");
 connectDB();
 
 // Init Middleware
-app.use(express.json({
-    extended: false
-}))
+app.use(compression(
+ { level: 6,
+  threshold:0,
+  filter: (req, res) => {
+    if(req.headers['x-no-compression']){
+      return false
+    }
+    return compression.filter(req,res)
+
+  }
+ }
+));
+app.use(
+  express.json({
+    extended: false,
+  })
+);
 // Register user routing
 app.use("/api/users", require("./routes/api/users"));
 // Auth routing
@@ -31,6 +46,5 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const PORT = process.env.PORT || 5000;
-
 
 app.listen(PORT, () => console.log("Server is runnning on port " + PORT));
