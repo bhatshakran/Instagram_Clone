@@ -17,6 +17,9 @@
         
         
     }
+    .makemodal{
+        @apply absolute ml-1;
+    }
     .filled{
         @apply w-6 h-6;
         background-image:url('images/heart_filled.png');

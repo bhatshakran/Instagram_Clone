@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState }  from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLikesById, likePost } from "../../redux/features/posts/posts";
+import Comment from "./Comment";
 
 
 const Postcard = ({ image, name, title, body, postid }) => {
   const [postlikes, setpostlikes] = useState();
-  console.log(postlikes)
   const currentUserID = useSelector((state) => state.posts.user._id);
   const dispatch = useDispatch();
   const heartRef = useRef();
@@ -21,7 +21,6 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const checkIfILiked = async () => {
     const likes = await getPostLikes();
     const myLike = likes.filter((like) => like.user.toString() === currentUserID);
-    console.log(likes);
     return { likes, myLike };
   };
 
@@ -139,14 +138,16 @@ const Postcard = ({ image, name, title, body, postid }) => {
         {/* comments */}
         <div className="ml-4 text-gray-500 ">View all comments</div>
         <div>
-          <div className="flex items-center gap-1 ml-4 text-sm name">
+          <div className="flex items-center gap-1 ml-3 text-sm name">
             <strong>v.lee87</strong>
             <p>Cool pic</p>
           </div>
-          <div className="flex items-center gap-1 ml-4 text-sm name">
+          <div className="flex items-center gap-1 ml-3 text-sm name">
             <strong>ra_one1</strong>
             <p>Maddd!!!!</p>
           </div>
+          {/* Add comment input */}
+            <Comment />
         </div>
       </div>
     </div>
