@@ -1,11 +1,11 @@
-import React, { useRef, useState }  from "react";
+import React, { useRef, useEffect, useState }  from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLikesById, likePost } from "../../redux/features/posts/posts";
 
 
 const Postcard = ({ image, name, title, body, postid }) => {
   const [postlikes, setpostlikes] = useState();
-  const currentUserID = useSelector((state) => state.posts.user.id);
+  const currentUserID = useSelector((state) => state.posts.user._id);
   const dispatch = useDispatch();
   const heartRef = useRef();
 
@@ -20,6 +20,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const checkIfILiked = async () => {
     const likes = await getPostLikes();
     const myLike = likes.filter((like) => like.user.toString() === currentUserID);
+    console.log(likes);
     return { likes, myLike };
   };
 
@@ -54,19 +55,22 @@ const Postcard = ({ image, name, title, body, postid }) => {
   };
 
   // display heart icon
-  const displayHeart = async () => {
-    const { myLike } = await checkIfILiked();
+  // const displayHeart = async () => {
+  //   const { myLike } = await checkIfILiked();
    
-    if (myLike.length >= 1) {
-      heartRef.current.classList.remove("hollow");
-      heartRef.current.classList.add("filled");
-    } else {
-      heartRef.current.classList.remove("filled");
-      heartRef.current.classList.add("hollow");
-    }
-  };
+  //   if (myLike.length >= 1) {
+  //     heartRef.current.classList.remove("hollow");
+  //     heartRef.current.classList.add("filled");
+  //   } else {
+  //     heartRef.current.classList.remove("filled");
+  //     heartRef.current.classList.add("hollow");
+  //   }
+  // };
 
-  displayHeart();
+  // displayHeart();
+  useEffect( ()=>{
+     getPostLikes();
+  }, [])
 
   return (
     <div className="pb-4 mb-4 border border-gray-200 rounded-sm shadow-sm postcard">

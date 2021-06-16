@@ -50,8 +50,9 @@ router.post(
 // @access Private
 router.get('/', auth, async(req,res) => {
   try {
-    const posts = await Post.find().sort({date:-1})
-    res.json({ posts, user: req.user });
+    const posts = await Post.find().sort({ date: -1 });
+    const user = await User.findById(req.user.id).select("-password");
+    res.json({ posts, user });
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server Error')
@@ -75,7 +76,7 @@ router.get('/myposts', auth, async(req, res)=>{
     res.status(500).send('Server Error')
   }
 })
-// @route GET api/posts/like/
+// @route GET api/posts/like/:id
 //  @desc Get all likes of a post
 // @access Private
 router.get('/like/:id', auth, async(req, res)=>{
@@ -136,10 +137,9 @@ router.put("/unlike/:id", auth, async (req, res) => {
     }
 
     // Get remove index
-    const removeIndex = post.likes.map((like) =>{
-      like.user.toString().indexOf(req.user.id)
-    }
-    );
+    const removeIndex = post.likes
+      .map((like) => like.user.toString())
+      .indexOf(req.user.id);
 
     // Splice the likes
     post.likes.splice(removeIndex, 1);
@@ -154,7 +154,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
 });
 
 // @route PUT api/posts/comment/:id
-// @desc Coment on a post
+// @desc Comment on a post
 // @access Private
 router.post("/comment/:id", [auth,
 [check("text", "Text is required").not().isEmpty()]], async(req, res) => {
