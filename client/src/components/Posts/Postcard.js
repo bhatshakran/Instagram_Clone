@@ -147,14 +147,14 @@ const Postcard = ({ image, name, title, body, postid }) => {
           <Link to={`/viewcomments/${postid}`}>View all comments</Link>
         </div>
         <div>
-          <div className="flex items-center gap-1 ml-3 text-sm name">
+          {/* <div className="flex items-center gap-1 ml-3 text-sm name">
             <strong>v.lee87</strong>
             <p>Cool pic</p>
-          </div>
-          <div className="flex items-center gap-1 ml-3 text-sm name">
+          </div> */}
+          {/* <div className="flex items-center gap-1 ml-3 text-sm name">
             <strong>ra_one1</strong>
             <p>Maddd!!!!</p>
-          </div>
+          </div> */}
           {/* Add comment input */}
           {formstate ? <Comment postid={postid} /> : ""}
         </div>
