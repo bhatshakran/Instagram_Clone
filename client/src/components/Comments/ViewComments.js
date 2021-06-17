@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../redux/features/Comments/comments";
+import Comment from "./Comment";
 
 const ViewComments = (props) => {
   const dispatch = useDispatch();
@@ -16,10 +17,22 @@ const ViewComments = (props) => {
 
   if (data.length > 0) {
     return (
-      <div>
+      <div className="h-screen max-w-xs mx-auto ">
+         <div className='border min-h-46'>
         {comments.comments.map((comment) => {
-          console.log(comment);
+   
+         
+          return (
+           
+                <Comment
+                  name={comment.name}
+                  text={comment.text}
+                  key={comment.text}
+                />
+
+          );    
         })}
+          </div>
       </div>
     );
   } else {
