@@ -9,30 +9,27 @@ const ViewComments = (props) => {
   const comments = useSelector((state) => state.comments.comments);
 
   const [data, setData] = useState([]);
-  // console.log(data);
-  // console.log(id);
+
   useEffect(() => {
     dispatch(getComments(id));
-   
   }, [dispatch]);
 
-  useEffect(()  =>  {
+  useEffect(() => {
     setData(comments);
   }, [comments]);
 
-  console.log(data);;
-
   if (data.length > 0) {
     return (
-      <div className="h-screen max-w-xs md:mx-auto ">
-        <div className="md:border min-h-46">
+      <div className="h-screen md:max-w-xs md:mx-auto ">
+        <div className="mt-3 md:border min-h-46">
           {comments.map((comment) => {
-            console.log(comment)
             return (
               <Comment
                 name={comment.name}
                 text={comment.text}
-                user={comment.user}
+               
+                p_id={id}
+                id={comment._id}
                 key={comment.text}
               />
             );

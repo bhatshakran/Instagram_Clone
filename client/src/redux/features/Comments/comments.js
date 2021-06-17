@@ -68,7 +68,13 @@ export const getComments = createAsyncThunk('/getcomments', async (id) =>{
 // delete a comment
 export const deleteComment = createAsyncThunk('/deletecomment', async(data) => {
   try {
-    console.log(data)
+    const comment_id = data.comment_id.id;
+    const id = data.id.p_id;
+    console.log(comment_id, id);
+    const res = await axios.delete(
+      `/api/posts/post/${id}/comment/${comment_id}`
+    );
+    console.log(res);
   } catch (err) {
     console.error(err)
     console.log('Deleting the comment failed!')
