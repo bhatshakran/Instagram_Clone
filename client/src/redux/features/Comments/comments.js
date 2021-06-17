@@ -59,6 +59,7 @@ export const commentSlice = createSlice({
   initialState: {
     comments: [],
     loading: true,
+    message:''
   },
 
   reducers: {},
@@ -66,6 +67,7 @@ export const commentSlice = createSlice({
     [createComment.fulfilled]: (state, action) => {
       state.loading = false;
       state.comments = action.payload;
+      state.message = 'Comment added'
     },
     [getComments.fulfilled]: (state, action) => {
       state.loading = false;
