@@ -6,7 +6,7 @@ const ViewComments = (props) => {
   const dispatch = useDispatch();
   const { id } = props.match.params;
   const comments = useSelector((state) => state.comments);
-//console.log(comments);
+
   const [data, setData] = useState([])
 
   useEffect(async () => {
