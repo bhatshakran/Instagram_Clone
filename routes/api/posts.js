@@ -188,16 +188,14 @@ router.post("/comment/:id", [auth,
 // @route GET api/posts/comment/:id
 // @desc Get all comments of a post
 // @access Private
-router.get('/comment/id', auth, async(req, res) =>{
+router.get("/comment/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    res.json(post.comments)
+    res.json(post.comments);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error')
+    res.status(500).send("Server Error");
   }
-
-
-})
+});
 
 module.exports = router;
