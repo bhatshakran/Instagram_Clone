@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "a139184ee5e0ee42f3b7",
-    "url": "/static/css/main.66719fb6.chunk.css"
+    "revision": "d8c4085456c0d14af711",
+    "url": "/static/css/main.086b05ca.chunk.css"
   },
   {
-    "revision": "a139184ee5e0ee42f3b7",
-    "url": "/static/js/main.ae6c87e3.chunk.js"
+    "revision": "d8c4085456c0d14af711",
+    "url": "/static/js/main.aea8a3df.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/static/media/heart_filled.95f2338a.png"
   },
   {
-    "revision": "656af481791b3530297621d242d513ac",
+    "revision": "00c99a57d65f784ca485f30311545a5b",
     "url": "/index.html"
   }
 ];
