@@ -9,10 +9,11 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const currentUserID = useSelector((state) => state.posts.user._id);
   const dispatch = useDispatch();
   const heartRef = useRef();
+  const [formstate, setFormstate] = useState(false)
 
   // get post likes
   const getPostLikes = async () => {
-    const res = await dispatch(getLikesById(postid));;
+    const res = await dispatch(getLikesById(postid));
     const likes = res.payload;
     setpostlikes(likes.length);;
     return likes;  };
@@ -67,6 +68,11 @@ const Postcard = ({ image, name, title, body, postid }) => {
     }
   };
 
+  // display comment form function
+  const displayCommentForm = () => {
+    setFormstate(!formstate)
+  }
+
   displayHeart();
   useEffect( ()=>{
      getPostLikes();
@@ -92,7 +98,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
             <div ref={heartRef} className="w-6 h-6"></div>
           </div>
           {/* comment icon */}
-          <div className="comment">
+          <div className="cursor-pointer comment" onClick={displayCommentForm}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-8 h-8"
@@ -147,7 +153,8 @@ const Postcard = ({ image, name, title, body, postid }) => {
             <p>Maddd!!!!</p>
           </div>
           {/* Add comment input */}
-            <Comment />
+          {formstate ? <Comment /> : '' }
+           
         </div>
       </div>
     </div>
