@@ -44,6 +44,17 @@ export const createComment = createAsyncThunk(
 
 //  get all comments
 export const getComments = createAsyncThunk('/getcomments', async (id) =>{
+  const setAuthToken = (token) => {
+    if (token) {
+      axios.defaults.headers.common["x-auth-token"] = token;
+    } else {
+      delete axios.defaults.headers.common["x-auth-token"];
+    }
+  };
+
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
   try {
     const res = await axios.get(`/api/posts/comment/${id}`);
     return res.data;

@@ -41,7 +41,7 @@ router.post("/",
   const {email, password} = req.body
   try {
     let user = await User.findOne({ email });
-    console.log(user.id);
+
     // Check if user exists
     if (!user) {
       return res.status(400).json({
@@ -79,7 +79,7 @@ router.post("/",
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token, user });
       }
     );
   } catch (err) {

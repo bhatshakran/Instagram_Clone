@@ -58,7 +58,16 @@ function App() {
             }
           }}
         />
-        <Route path="/viewcomments/:id" component={ViewComments} />
+        <Route
+          path="/viewcomments/:id"
+          render={(props) => {
+            if (!auth) {
+              return <Redirect to="/login" />;
+            } else {
+              return <ViewComments {...props} />;
+            }
+          }}
+        />
       </Switch>
       {auth ? <Bottombar /> : ""}
     </div>
