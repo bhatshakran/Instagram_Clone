@@ -90,7 +90,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
         </h5>
       </div>
       <div className="medium">
-        <img src={image} alt="" className="mx-auto my-2 fill" />
+        <img src={image} alt="" className="mx-auto md:mt-2 fill" />
       </div>
       <div className="pt-2 maincontainer">
         <div className="flex items-center gap-1 ml-3 icons">

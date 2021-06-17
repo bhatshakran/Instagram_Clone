@@ -74,7 +74,7 @@ export const deleteComment = createAsyncThunk('/deletecomment', async(data) => {
     const res = await axios.delete(
       `/api/posts/post/${id}/comment/${comment_id}`
     );
-    console.log(res);
+    return res.data;
   } catch (err) {
     console.error(err)
     console.log('Deleting the comment failed!')
@@ -85,20 +85,33 @@ export const commentSlice = createSlice({
   name: "comments",
   initialState: {
     comments: [],
-    loading: true,
-    message:''
+    loading: false,
+    message: "",
   },
 
   reducers: {},
   extraReducers: {
+    [createComment.pending]: (state) => {
+      state.loading = true;
+    },
     [createComment.fulfilled]: (state, action) => {
       state.loading = false;
       state.comments = action.payload;
-      state.message = 'Comment added'
+      state.message = "Comment added";
+    },
+    [getComments.pending]: (state) => {
+      state.loading = true;
     },
     [getComments.fulfilled]: (state, action) => {
       state.loading = false;
       state.comments = action.payload;
+    },
+    [deleteComment.pending]: (state) => {
+      state.loading = true;
+    },
+    [deleteComment.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.message = "Comment Deleted!";
     },
   },
 });

@@ -78,10 +78,10 @@
             min-height: 537px;
         }
         .medium{
-            height:350px;
+            min-height:250px;
         }
         .fill{
-            height:350px;
+            object-fit:contain
         }
     }
 

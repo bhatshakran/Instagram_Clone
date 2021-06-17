@@ -1,9 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment } from "../../redux/features/Comments/comments";
+import Loading from "../../utils/Loading";
 
 const Comment = ({ name, text,p_id, id }) => {
+
   const stuff = useSelector((state) => JSON.parse(state.auth.user));
+  const loading = useSelector((state) => state.comments.loading);
+  
   const dispatch = useDispatch()
 
   const deleteCommt = () => {
@@ -11,11 +15,18 @@ const Comment = ({ name, text,p_id, id }) => {
      id:{p_id},
      comment_id:{id}
    }
-  //  console.log(data)
-   dispatch(deleteComment(data))
+ 
+   dispatch(deleteComment(data));
+  
    
   }
-
+if(loading){
+return ( <div className="flex items-center justify-center h-screen mb-16 ">
+            <Loading />
+        </div>
+  
+    );
+}else{
   return (
     <div className="flex items-start mx-2 mb-3 md:mx-8 md:my-10 md:mb-8 align-center">
       <h4 className="mr-3">
@@ -39,6 +50,7 @@ const Comment = ({ name, text,p_id, id }) => {
       
     </div>
   );
+      }
 };
 
 export default Comment;

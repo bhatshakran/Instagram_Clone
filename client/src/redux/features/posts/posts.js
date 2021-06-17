@@ -178,10 +178,14 @@ export const postSlice = createSlice({
         image: action.payload.image,
       };
     },
+    [getAllPosts.pending]: (state) => {
+      state.loading = true;
+    },
     [getAllPosts.fulfilled]: (state, action) => {
       state.message = "posts fetched";
       state.posts = action.payload.posts;
       state.user = action.payload.user;
+      state.loading = false;
     },
 
     [likePost.fulfilled]: (state, action) => {

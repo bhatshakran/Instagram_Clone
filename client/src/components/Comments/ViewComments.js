@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../redux/features/Comments/comments";
 import Comment from "./Comment";
+import Loading from "../../utils/Loading";
 
 const ViewComments = (props) => {
   const dispatch = useDispatch();
   const { id } = props.match.params;
-  const comments = useSelector((state) => state.comments.comments);
+  const commt = useSelector((state) => state.comments);
+  const comments = commt.comments;
+  const loading = commt.loading;
 
-  const [data, setData] = useState([]);
+  const [, setData] = useState([]);
 
   useEffect(() => {
     dispatch(getComments(id));
@@ -18,7 +21,7 @@ const ViewComments = (props) => {
     setData(comments);
   }, [comments]);
 
-  if (data.length > 0) {
+  if (!loading) {
     return (
       <div className="h-screen md:max-w-xs md:mx-auto ">
         <div className="mt-3 md:border min-h-46">
@@ -27,7 +30,6 @@ const ViewComments = (props) => {
               <Comment
                 name={comment.name}
                 text={comment.text}
-               
                 p_id={id}
                 id={comment._id}
                 key={comment.text}
@@ -38,7 +40,11 @@ const ViewComments = (props) => {
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return ( <div className="flex items-center justify-center h-screen ">
+            <Loading />
+        </div>
+  
+    );
   }
 };;
 
