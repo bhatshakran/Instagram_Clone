@@ -23,13 +23,11 @@ const ViewComments = (props) => {
    
          
           return (
-           
                 <Comment
                   name={comment.name}
                   text={comment.text}
                   key={comment.text}
                 />
-
           );    
         })}
           </div>

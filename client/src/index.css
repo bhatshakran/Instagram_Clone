@@ -52,10 +52,10 @@
     }
 
     .medium{
-        max-height:750px;
+        max-height:650px;
     }
     .fill{
-        max-height:750px;
+        max-height:650px;
     }
 
     .bottom{
@@ -78,10 +78,10 @@
             min-height: 637px;
         }
         .medium{
-            height:400px;
+            height:350px;
         }
         .fill{
-            height:400px;
+            height:350px;
         }
     }
 
