@@ -54,6 +54,16 @@ export const getComments = createAsyncThunk('/getcomments', async (id) =>{
   }
 })
 
+// delete a comment
+export const deleteComment = createAsyncThunk('/deletecomment', async(data) => {
+  try {
+    console.log(data)
+  } catch (err) {
+    console.error(err)
+    console.log('Deleting the comment failed!')
+  }
+})
+
 export const commentSlice = createSlice({
   name: "comments",
   initialState: {

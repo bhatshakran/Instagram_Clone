@@ -21,13 +21,14 @@ const ViewComments = (props) => {
          <div className='border min-h-46'>
         {comments.comments.map((comment) => {
    
-         
+         console.log(comment);
           return (
-                <Comment
-                  name={comment.name}
-                  text={comment.text}
-                  key={comment.text}
-                />
+            <Comment
+              name={comment.name}
+              text={comment.text}
+              user={comment.user}
+              key={comment.text}
+            />
           );    
         })}
           </div>
