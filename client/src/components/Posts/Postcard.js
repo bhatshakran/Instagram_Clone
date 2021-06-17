@@ -153,8 +153,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
             <p>Maddd!!!!</p>
           </div>
           {/* Add comment input */}
-          {formstate ? <Comment /> : '' }
-           
+          {formstate ? <Comment postid={postid} /> : ""}
         </div>
       </div>
     </div>
