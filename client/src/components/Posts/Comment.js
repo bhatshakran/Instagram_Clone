@@ -1,12 +1,25 @@
-import React, { useRef, useState } from "react";
-import Picker from "emoji-picker-react";
+import React, {  useRef, useState } from "react";
+import { EmojiButton } from '@joeattardi/emoji-button';
 
 const Comment = () => {
   const [text, setText] = useState("");
   const [errors, setErrors] = useState([]);
-  const [chosenEmoji, setChosenEmoji] = useState(null);
-  const keyboard = useRef(null);
-  const [state, setState] = useState(false);
+  const emobutton = useRef(null)
+  const input = useRef(null)
+
+
+    const picker = new EmojiButton();
+  
+    picker.on('emoji', emoji => {
+      input.current.value += emoji.emoji;
+      const data = [...text,emoji.emoji]
+      const styledData = data.toString().replace(/,/g, '')
+      setText(styledData)
+    });
+
+    const emohandler = () => {
+      picker.pickerVisible ? picker.hidePicker() : picker.showPicker(emobutton.current);
+    }
 
   const changeHandler = (e) => {
     if (text.length === 0) {
@@ -20,36 +33,28 @@ const Comment = () => {
       console.log("cannot post");
     } else {
       console.log("posting");
+      console.log(text)
     }
   };
-  const onEmojiClick = (event, emojiObject) => {
-    setText(emojiObject);
-  };
+  
 
   const alert = () => {
     return <div className="text-xs text-red-400">{errors}</div>;
   };
 
-  const displayKeyboard = () => {
-    if (!state) {
-      keyboard.current.style.display = "block";
-      setState(true);
-    } else {
-      keyboard.current.style.display = "none";
-      setState(false);
-    }
-  };
+  
 
   return (
     <React.Fragment>
       <div className="flex items-center justify-start gap-0 mt-3 border-t h-18">
-        <div className="w-10 cursor-pointer" onClick={displayKeyboard}>
+        <div className="w-10 cursor-pointer" >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6 text-gray-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            ref={emobutton} onClick={emohandler}
           >
             <path
               strokeLinecap="round"
@@ -58,18 +63,14 @@ const Comment = () => {
               d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <div className="hidden makemodal" ref={keyboard}>
-            <Picker onEmojiClick={onEmojiClick} disableSearchBar={true} />
-          </div>
+         
+         
         </div>
-        <textarea
-          name="text"
-          onChange={changeHandler}
-          placeholder="Add a comment"
-          className="w-full h-12 mr-1 focus:outline-none"
-        ></textarea>
-
-        <button onClick={submitHandler}>Post</button>
+        <input placeholder='Add a comment...'
+        onChange={changeHandler}
+        value={text}
+        type="text" ref={input} className='w-full h-12 mr-1 focus:outline-none'/>
+        <button onClick={submitHandler} className='pr-2 text-blue-300 focus:outline-none'>Post</button>
       </div>
       {errors.length !== 0 ? alert() : ""}
     </React.Fragment>
