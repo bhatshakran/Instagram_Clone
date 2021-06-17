@@ -7,24 +7,24 @@ const ViewComments = (props) => {
   const { id } = props.match.params;
   const comments = useSelector((state) => state.comments);
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
   useEffect(async () => {
     const res = await dispatch(getComments(id));
     setData(res.payload);
-  }, []); 
+  }, []);
 
-  if(data.length > 0){
-      return (
-          <div>
-              {comments.comments.map(comment => {
-                  console.log(comment)
-              })}
-          </div>
-      )
-  }else{
- return <div>Loading...</div>
-  } 
+  if (data.length > 0) {
+    return (
+      <div>
+        {comments.comments.map((comment) => {
+          console.log(comment);
+        })}
+      </div>
+    );
+  } else {
+    return <div>Loading...</div>;
+  }
 };
 
 export default ViewComments;
