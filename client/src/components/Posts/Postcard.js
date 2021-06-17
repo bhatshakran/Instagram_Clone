@@ -10,7 +10,9 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const currentUserID = useSelector((state) => state.posts.user._id);
   const dispatch = useDispatch();
   const heartRef = useRef();
-  const [formstate, setFormstate] = useState(false)
+  const [formstate, setFormstate] = useState(false);
+  const [subscribed, setSubscribed] = useState(true);
+
 
   // get post likes
   const getPostLikes = async () => {
@@ -59,24 +61,39 @@ const Postcard = ({ image, name, title, body, postid }) => {
   // display heart icon
   const displayHeart = async () => {
     const { myLike } = await checkIfILiked();
-   
-    if (myLike.length >= 1) {
+   if(subscribed && heartRef.current !== null){
+    if ( myLike.length >= 1) {
       heartRef.current.classList.remove("hollow");
       heartRef.current.classList.add("filled");
     } else {
       heartRef.current.classList.remove("filled");
       heartRef.current.classList.add("hollow");
     }
+   }
+   
   };
 
   // display comment form function
   const displayCommentForm = () => {
+    window.scrollTo(0,window.scrollY+50)
     setFormstate(!formstate)
+    
   }
 
-  displayHeart();
+  
   useEffect( ()=>{
-     getPostLikes();
+    
+    
+    if  (subscribed)  {
+      
+      getPostLikes();
+      displayHeart()
+    }
+
+    //  Cleanup function
+    return () => {
+      setSubscribed(false)
+    };
   }, [])
 
   return (

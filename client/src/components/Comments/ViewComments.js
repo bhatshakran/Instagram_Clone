@@ -18,6 +18,7 @@ const ViewComments = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
+    window.scroll(0, 0);
     setData(comments);
   }, [comments]);
 

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { hideAlert } from "../../utils/hideAlert";
 import AddpostForm from "../Forms/AddpostForm";
@@ -14,10 +14,16 @@ const CreatePost = () => {
   console.log(loading)
 
   const clearstatemsg = () => {
+   
     setTimeout(() => {
       dispatch(clearAlertMsg());
     }, 2000);
   };
+
+  
+  useEffect(()=>{
+    window.scroll(0,0);
+  },[])
 
   if(loading){
    return (

@@ -5,9 +5,9 @@ import Loading from "../../utils/Loading";
 
 const Comment = ({ name, text,p_id, id }) => {
 
-  const stuff = useSelector((state) => JSON.parse(state.auth.user));
+  const stuff = useSelector((state) => state.auth.user);
   const loading = useSelector((state) => state.comments.loading);
-  
+  const user = JSON.parse(stuff);
   const dispatch = useDispatch()
 
   const deleteCommt = () => {
@@ -32,22 +32,19 @@ return ( <div className="flex items-center justify-center h-screen mb-16 ">
       <h4 className="mr-3">
         <strong>{name}</strong>
       </h4>
-      <div className='grid grid-cols-2 gap-0'>
-       <p>{text}</p> 
-      {name === stuff.name ? (
-        <button 
-        onClick={deleteCommt}
-        className="w-12 ml-4 text-white bg-blue-300 hover:bg-instablue-default">
-          <small>
-          Delete
-          </small>
-       
-        </button>
-      ) : (
-        ""
-      )}
+      <div className="grid grid-cols-2 gap-0">
+        <p>{text}</p>
+        {name === user.name ? (
+          <button
+            onClick={deleteCommt}
+            className="w-12 ml-4 text-white bg-blue-300 hover:bg-instablue-default"
+          >
+            <small>Delete</small>
+          </button>
+        ) : (
+          ""
+        )}
       </div>
-      
     </div>
   );
       }
