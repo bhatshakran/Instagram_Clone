@@ -11,9 +11,8 @@ const ViewComments = (props) => {
 
   useEffect(async () => {
     const res = await dispatch(getComments(id));
-    setData(res.payload)
-    
-  }, []);
+    setData(res.payload);
+  }, []); 
 
   if(data.length > 0){
       return (
