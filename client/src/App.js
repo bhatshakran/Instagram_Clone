@@ -8,6 +8,7 @@ import Signup from "./components/Auth/Signup";
 import CreatePost from "./components/Posts/CreatePost";
 import { Redirect } from "react-router-dom";
 import Bottombar from "./components/Layout/Bottombar";
+import ViewComments from "./components/Comments/ViewComments";
 
 function App() {
   let token = useSelector((state) => state.auth);
@@ -57,6 +58,7 @@ function App() {
             }
           }}
         />
+        <Route path="/viewcomments/:id" component={ViewComments} />
       </Switch>
       {auth ? <Bottombar /> : ""}
     </div>

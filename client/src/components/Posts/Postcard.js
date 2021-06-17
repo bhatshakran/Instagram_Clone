@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState }  from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLikesById, likePost } from "../../redux/features/posts/posts";
 import Comment from "./Comment";
+import { Link } from "react-router-dom";
 
 
 const Postcard = ({ image, name, title, body, postid }) => {
@@ -15,7 +16,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const getPostLikes = async () => {
     const res = await dispatch(getLikesById(postid));
     const likes = res.payload;
-    setpostlikes(likes.length);;
+    setpostlikes(likes.length);
     return likes;  };
 
   //  check if i have liked the post or not
@@ -142,7 +143,9 @@ const Postcard = ({ image, name, title, body, postid }) => {
           <p>{body}</p>
         </div>
         {/* comments */}
-        <div className="ml-4 text-gray-500 ">View all comments</div>
+        <div className="ml-4 text-gray-500 ">
+          <Link to={`/viewcomments/${postid}`}>View all comments</Link>
+        </div>
         <div>
           <div className="flex items-center gap-1 ml-3 text-sm name">
             <strong>v.lee87</strong>
