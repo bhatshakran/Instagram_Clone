@@ -9,6 +9,7 @@ import CreatePost from "./components/Posts/CreatePost";
 import { Redirect } from "react-router-dom";
 import Bottombar from "./components/Layout/Bottombar";
 import ViewComments from "./components/Comments/ViewComments";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   let token = useSelector((state) => state.auth);
@@ -65,6 +66,16 @@ function App() {
               return <Redirect to="/login" />;
             } else {
               return <ViewComments {...props} />;
+            }
+          }}
+        />
+        <Route
+          path="/profile"
+          render={(props) => {
+            if (!auth) {
+              return <Redirect to="/login" />;
+            } else {
+              return <Profile {...props} />;
             }
           }}
         />

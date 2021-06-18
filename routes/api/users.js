@@ -36,10 +36,11 @@ router.post(
         }
         // Create new user with that email
         user = new User({
-            name, 
-            email, 
-            password
-        })
+          name,
+          email,
+          password,
+          profilepic,
+        });
 
         // We dont want plain text passwords
         // So we will hash them using bcrypt

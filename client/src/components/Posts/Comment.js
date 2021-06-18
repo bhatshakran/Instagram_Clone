@@ -13,7 +13,6 @@ const Comment = ({ postid }) => {
   const picker = new EmojiButton();
 
   picker.on("emoji", (emoji) => {
-    input.current.value += emoji.emoji;
     const data = [...text, emoji.emoji];
     const styledData = data.toString().replace(/,/g, "");
     setText(styledData);
@@ -80,7 +79,7 @@ const Comment = ({ postid }) => {
         />
         <button
           onClick={submitHandler}
-          className="pr-2 text-blue-300 focus:outline-none hover:text-blue-500"
+          className="mr-3 text-blue-300 focus:outline-none hover:text-blue-500"
         >
           Post
         </button>

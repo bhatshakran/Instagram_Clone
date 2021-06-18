@@ -75,7 +75,7 @@
 
     @media (max-width:500px){
         .postcard{
-            min-height: 537px;
+            min-height: 437px;
         }
         .medium{
             min-height:250px;
