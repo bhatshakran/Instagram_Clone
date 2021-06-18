@@ -11,8 +11,8 @@ const Profile = () => {
         <div className="w-full col-start-1 col-end-2 image md:col-end-3">
           <img
             src={shore}
-              alt=""
-              className="w-20 h-20 rounded-full md:w-32 md:h-32"
+            alt=""
+            className="w-20 h-20 rounded-full md:w-32 md:h-32"
           />
         </div>
         {/* edit and name */}
@@ -28,8 +28,7 @@ const Profile = () => {
       </div>
 
       {/* following and followers showcase */}
-      <div 
-      className="items-center hidden py-4 mt-6 text-center border-t border-b md:flex showcase_section md:w-1/3 md:ml-48 md:py-2 md:border-0 md:mt-2 md:mb-4 lg:pl-2 xl:ml-60 2xl:ml-72 2xl:pl-0">
+      <div className="items-center hidden py-4 mt-6 text-center border-t border-b md:flex showcase_section md:w-1/3 md:ml-48 md:py-2 md:border-0 md:mt-2 md:mb-4 lg:pl-2 xl:ml-60 2xl:ml-72 2xl:pl-0">
         <div className="w-1/3 posts">
           <strong> 30</strong>
           <br />
@@ -61,11 +60,7 @@ const Profile = () => {
           <br />
           Bcome nothin, & He'll turn u into everythin
         </div>
-
       </div>
-
-      
-
 
       {/* following and followers showcase */}
       <div className="flex items-center py-4 mt-6 text-center border-t border-b showcase_section md:hidden">
@@ -87,15 +82,18 @@ const Profile = () => {
       </div>
 
       {/* images grid */}
-      <div className="grid grid-cols-3 gap-1 images-section md:mt-32">
-        <div className="img-compt">
-          <img src={emo} alt="" />
+      <div className="grid grid-cols-3 gap-1 images-section md:mt-32 md:h-80 md:grid-cols-4 ">
+        <div className="img-compt" >
+          <img src={emo} alt="" className='md:h-80'/>
         </div>
         <div className="img-compt">
-          <img src={gyal} alt="" />
+          <img src={gyal} alt="" className='md:h-80'/>
         </div>
         <div className="img-compt">
-          <img src={shore} alt="" />
+          <img src={shore} alt="" className='md:h-80' />
+        </div>
+        <div className="img-compt" >
+          <img src={emo} alt="" className='md:h-80'/>
         </div>
       </div>
     </div>
