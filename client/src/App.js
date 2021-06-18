@@ -10,6 +10,7 @@ import { Redirect } from "react-router-dom";
 import Bottombar from "./components/Layout/Bottombar";
 import ViewComments from "./components/Comments/ViewComments";
 import Profile from "./components/Profile/Profile";
+import EditProfile from "./components/Profile/EditProfile";
 
 function App() {
   let token = useSelector((state) => state.auth);
@@ -76,6 +77,16 @@ function App() {
               return <Redirect to="/login" />;
             } else {
               return <Profile {...props} />;
+            }
+          }}
+        />
+        <Route
+          path="/editprofile"
+          render={(props) => {
+            if (!auth) {
+              return <Redirect to="/login" />;
+            } else {
+              return <EditProfile {...props} />;
             }
           }}
         />
