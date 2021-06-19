@@ -25,7 +25,7 @@ export const uploadProfilePic = createAsyncThunk("/cloudinary/pp", async (file) 
   }
 });
 
-
+// upload user profile
 
 export const updateProfile = createAsyncThunk(
   "/updateprofile",
@@ -77,6 +77,19 @@ export const updateProfile = createAsyncThunk(
 );
 
 
+// get my posts
+export const getmyposts = createAsyncThunk('getmyposts/', async() => {
+  try {
+    const res = await axios.get('/api/posts/myposts')
+    return res;
+    
+  } catch (err) {
+    console.error(err)
+    console.log('Couldn\'t fetch your posts')
+  }
+})
+
+
 
 
 export const profileSlice = createSlice({
@@ -85,6 +98,7 @@ export const profileSlice = createSlice({
     loading: false,
     message: "",
     response: {},
+    userposts:[]
   },
   reducers: {},
   extraReducers: {
@@ -97,6 +111,11 @@ export const profileSlice = createSlice({
       state.loading = false
     }
   },
+    [getmyposts.fulfilled] : (state, action) => {
+      state.loading = false;
+      state.userposts =action.payload;
+      state.message = 'Fetched your posts!'
+    }
 });
 
 export default profileSlice.reducer;

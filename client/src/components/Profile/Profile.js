@@ -14,7 +14,7 @@ const Profile = () => {
   const user = useSelector((state) => state.auth.user);
   
 
-  const { name, username, bio } = user;
+  const { name, username, bio, profilepic } = user;
 
 
 
@@ -23,7 +23,7 @@ const Profile = () => {
       <div className="grid grid-cols-3 px-4 mt-10 sm:grid-cols-6 name_section md:items-start md:grid-cols-9 md:h-12">
         <div className="w-full col-start-1 col-end-2 image md:col-end-3">
           <img
-            src={shore}
+            src={profilepic}
             alt=""
             className="w-20 h-20 rounded-full md:w-32 md:h-32"
           />
@@ -64,9 +64,7 @@ const Profile = () => {
         <div className="name">
           <strong>{name}</strong>{" "}
         </div>
-        <div className="about">
-          {bio}
-        </div>
+        <div className="about">{bio}</div>
       </div>
 
       {/* following and followers showcase */}
