@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getcurrentuser } from "../../redux/features/auth/auth";
-import { updateProfile } from "../../redux/features/profile/profile";
+import { updateProfile, uploadProfilePic } from "../../redux/features/profile/profile";
 import { useHistory } from "react-router-dom";
+import imageCompression from "browser-image-compression";
 
 
 const EditProfile = () => {
@@ -37,9 +38,23 @@ const EditProfile = () => {
   const [errors, seterrors] = useState({})
 
 
+//  state for image file
+const [myfile, setMyfile] = useState([]);
 
 
 
+// Image updation
+const updateimagehandler = e =>{
+  console.log(e.target.files)
+  const imageFile = e.target.files[0];
+    console.log("originalFile instanceof Blob", imageFile instanceof Blob); // true
+    console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+    setMyfile(imageFile);
+    
+}
+
+
+  
 
   
 
@@ -69,6 +84,38 @@ const EditProfile = () => {
 
     // Submit handler function
     const submithandler = async () => {
+      let profilepic;
+      (async function () {
+        console.log('Compression started')
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true,
+        };
+    let compressedFile ;
+        try {
+           compressedFile = await imageCompression(myfile, options);
+        
+          console.log(
+            "compressedFile instanceof Blob",
+            compressedFile instanceof Blob
+          ); // true
+          console.log(
+            `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+          );
+     
+        } catch (err) {
+          console.log(err);
+        }
+        console.log("Compressed");
+        console.log(compressedFile)
+        // upload image to cloudinary
+        const res =  await dispatch(uploadProfilePic(compressedFile));
+         profilepic =  res.payload.secure_url;
+        console.log('Uploaded to Cloudinary')
+       
+
+         // input text fields  stuff from here
       let getdata = {
         name: formdata.name,
         email: formdata.email,
@@ -94,13 +141,20 @@ const EditProfile = () => {
       }
       if (errors.name === "" && errors.email === "") {
         setundefinedtovalue();
-        getdata = { ...getdata, _id };
+        getdata = { ...getdata, _id, profilepic };
         // console.log(getdata)
         await dispatch(updateProfile(getdata));
         history.push('/profile')
       } else {
         console.log("Cant proceed");
       }
+  
+       
+      })();
+
+
+
+     
     };
 
 
@@ -113,14 +167,16 @@ const EditProfile = () => {
     <div className="min-h-screen pt-6 mt-8 border-t md:border-t-0 md:w-2/3 md:mx-auto">
       {/* image updation */}
       <div className="grid items-center grid-cols-9 image_editing ">
-        <div className="px-3 mr-4 ">
-          <img src={profilepic} alt="" className="w-10 h-10 rounded-full" />
+        <div className="col-start-1 col-end-3 px-3 ">
+          <img src={profilepic} alt="" className="rounded-full w-14 h-14" />
         </div>
-        <div className="col-start-2 col-end-11 ml-8 sm:ml-0 name">
+        <div className="col-start-3 col-end-11 sm:ml-0 name">
           <p className="text-lg"> shakran._.bhat</p>
-          <button className="text-sm font-medium text-instablue-default">
-            Change Profile Picture
-          </button>
+          <input
+            type="file"
+            className="text-sm font-medium text-instablue-default"
+            onChange={updateimagehandler}
+          />
         </div>
       </div>
       <div className="w-3/4 ">
@@ -139,7 +195,11 @@ const EditProfile = () => {
             onChange={changeHandler}
             className="px-4 py-1 border md:col-start-2 md:col-end-7"
           />
-          {errors.name && errors.name.length >0 ? <div className='text-xs text-red-500'>{errors.name}</div>  :''}
+          {errors.name && errors.name.length > 0 ? (
+            <div className="text-xs text-red-500">{errors.name}</div>
+          ) : (
+            ""
+          )}
 
           <p className="mt-4 leading-3 text-gray-500 md:col-start-1 md:col-end-7">
             <small>
@@ -187,7 +247,6 @@ const EditProfile = () => {
             onChange={changeHandler}
             className="px-4 py-1 border md:col-start-2 md:col-end-7"
           />
-        
         </div>
         {/* Bio */}
         <div className="grid items-center grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
@@ -202,8 +261,7 @@ const EditProfile = () => {
             defaultValue={bio}
             onChange={changeHandler}
             className="px-4 py-1 border md:col-start-2 md:col-end-7"
-          >
-          </textarea>
+          ></textarea>
         </div>
         {/* Personal Information */}
         <div className="grid items-center grid-cols-1 mx-4 mt-8 name_edit">
@@ -231,7 +289,11 @@ const EditProfile = () => {
             onChange={changeHandler}
             className="px-4 py-1 border md:col-start-2 md:col-end-7"
           />
-  {errors.email && errors.email.length >0 ? <div className='text-xs text-red-500'>{errors.email}</div>  :''}
+          {errors.email && errors.email.length > 0 ? (
+            <div className="text-xs text-red-500">{errors.email}</div>
+          ) : (
+            ""
+          )}
           <label
             htmlFor="phone"
             className="mt-3 font-medium text-md md:col-start-1 md:col-end-2"
@@ -263,7 +325,10 @@ const EditProfile = () => {
         </div>
         {/* Similar account suggestions */}
         <div className="mx-4 mt-8 mb-3 name_edit md:grid-cols-6">
-          <button onClick={submithandler} className="px-3 py-1 text-sm font-medium text-white bg-blue-300 rounded">
+          <button
+            onClick={submithandler}
+            className="px-3 py-1 text-sm font-medium text-white bg-blue-300 rounded"
+          >
             Submit
           </button>
         </div>

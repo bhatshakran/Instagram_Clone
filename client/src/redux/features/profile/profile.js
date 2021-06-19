@@ -2,11 +2,36 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
+// upload picture to cloudinary action
+export const uploadProfilePic = createAsyncThunk("/cloudinary/pp", async (file) => {
+  let formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "insta_clone");
+  formData.append("folder", "profilepics");
+  delete axios.defaults.headers.common["x-auth-token"];
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const url = `https://api.cloudinary.com/v1_1/duuo1ctgy/image/upload`;
+  try {
+    const res = await axios.post(url, formData, config);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    console.log("Failed to upload");
+  }
+});
+
+
+
 export const updateProfile = createAsyncThunk(
   "/updateprofile",
   async (data) => {
     try {
-      const { _id, name, email, username, bio, gender, website, phone } = data;
+      const { _id, name, email, username, bio, gender, website, phone, profilepic } = data;
 
       const body = JSON.stringify({
         name,
@@ -16,6 +41,7 @@ export const updateProfile = createAsyncThunk(
         website,
         gender,
         phone,
+        profilepic
       });
 
       const config = {
@@ -63,8 +89,13 @@ export const profileSlice = createSlice({
   reducers: {},
   extraReducers: {
     [updateProfile.fulfilled]: (state, action) => {
-      // console.log(state);
+      state.loading = false;
+      state.message = 'Profile updatedd!';
+      state.response = action.payload
     },
+    [uploadProfilePic.fulfilled]: (state, action) => {
+      state.loading = false
+    }
   },
 });
 
