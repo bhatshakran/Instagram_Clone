@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getcurrentuser } from "../../redux/features/auth/auth";
 import { updateProfile } from "../../redux/features/profile/profile";
 
 
 const EditProfile = () => {
   const dispatch = useDispatch();
+  useEffect(()=>{
+      dispatch(getcurrentuser())
+  }, [])
   const user = useSelector((state) => state.auth.user);
-  const parseduser = JSON.parse(user);
+  
+  
   
 
   const {
@@ -19,9 +24,9 @@ const EditProfile = () => {
     bio,
     gender,
     _id,
-  } = parseduser;
+  } = user;
 
-    
+  
   // state for input fields
   const [formdata, setformdata] = useState({});
 
@@ -66,7 +71,7 @@ const EditProfile = () => {
         username:formdata.username,
         bio:formdata.bio,
         website:formdata.website,
-        gender:formdata.website,
+        gender:formdata.gender,
         phone:formdata.phone
       }
    
@@ -80,13 +85,15 @@ const EditProfile = () => {
       function setundefinedtovalue  () {
         for (const field in getdata) {
           if (getdata[field] === undefined) {
-            getdata = { ...getdata, [field]: parseduser[field] };
+            getdata = { ...getdata, [field]: user[field] };
+         
           }
         }
       }
       if(errors.name === '' && errors.email === ''){
         setundefinedtovalue();
         getdata = { ...getdata, _id };
+        // console.log(getdata)
         dispatch(updateProfile(getdata));
       }else{
         console.log('Cant proceed')

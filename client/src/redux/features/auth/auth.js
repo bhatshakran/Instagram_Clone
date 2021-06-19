@@ -15,6 +15,35 @@ export const loginUser = createAsyncThunk("/api/auth", async (values) => {
   return response;
 });
 
+// get current user account
+export const getcurrentuser = createAsyncThunk('getcurrentuser', async() => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const setAuthToken = (token) => {
+      if (token) {
+        axios.defaults.headers.common["x-auth-token"] = token;
+      } else {
+        delete axios.defaults.headers.common["x-auth-token"];
+      }
+    };
+
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
+    const res = await axios.get('/api/auth/currentuser', config)
+    return res.data
+  } catch (err) {
+    console.error(err);
+    console.log("Could not fetch the current user details!");
+  }
+})
+
 
 
 
@@ -46,10 +75,14 @@ export const loginSlice = createSlice({
       state.token = action.payload.data.token;
       state.isAuthenticated = true;
       state.loading = false;
-      state.user = action.payload.data.user;
+      // state.user = action.payload.data.user;
 
       
     },
+
+    [getcurrentuser.fulfilled] :(state, action) => {
+      state.user = action.payload
+    }
   },
 });
 export const { logoutUser } = loginSlice.actions;

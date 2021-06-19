@@ -109,7 +109,7 @@ router.patch('/editprofile/:id', auth, async(req, res) =>{
 // @access Private
 router.get('/currentuser', auth, async(req, res) =>{
   try {
-    let user = await User.findById(req.user.id)
+    let user = await User.findById(req.user.id).select("-password");
     res.json(user)
     
   } catch (err) {

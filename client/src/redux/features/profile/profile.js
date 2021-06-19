@@ -40,13 +40,16 @@ export const updateProfile = createAsyncThunk(
         body,
         config
       );
-      return res;
+      return res.data;
     } catch (err) {
       console.error(err);
       console.log("Failed to update the profile");
     }
   }
 );
+
+
+
 
 export const profileSlice = createSlice({
   name: "profile",
