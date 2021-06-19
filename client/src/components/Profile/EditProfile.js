@@ -1,13 +1,101 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 
 const EditProfile = () => {
   const user = useSelector((state) => state.auth.user);
   const parseduser = JSON.parse(user);
-
   const { name, phone, profilepic,email, username, website, bio, gender } =
     parseduser;
+  // state for input fields
+  const [formdata, setformdata] = useState({});
+
+  // state for errors
+
+  const [errors, seterrors] = useState({})
+
+
+
+
+
+
+  
+
+    // Change handler function
+    const changeHandler = e => {
+      setformdata({...formdata, [e.target.name]: e.target.value}) 
+    }
+
+
+    const validation =() =>{
+      if(formdata.name === ''){
+        errors['name'] = 'Name cannot be empty'
+        seterrors({...errors})
+      }else{
+        errors['name'] = ''
+        seterrors({...errors})
+      }
+      if(formdata.email === ''){
+        errors['email'] = 'Email cannot be empty'
+        seterrors({...errors})
+      }else{
+        errors['email'] = ''
+        seterrors({...errors})
+      }
+    }
+
+    const submithandler = () => {
+      let getdata = {
+        name:formdata.name,
+        email:formdata.email,
+        username:formdata.username,
+        bio:formdata.bio,
+        website:formdata.website,
+        gender:formdata.website,
+        phone:formdata.phone
+      }
+   
+      // handle validation
+      validation()
+
+
+      // before submitting check if name and email were not changed at all & set their values
+      // to the default db value
+      
+      function setundefinedtovalue  () {
+        for(const field in getdata){
+          if(getdata[field] === undefined){
+            getdata = ({...getdata, [field]:parseduser[field]})
+          }
+       
+         
+        }
+       console.log(getdata)
+       
+      }
+      if(errors.name === '' && errors.email === ''){
+        setundefinedtovalue()
+      }else{
+        console.log('Cant proceed')
+      }
+     
+      
+      
+
+   
+
+      
+    
+
+     
+    }
+
+
+
+
+
+
+
   return (
     <div className="min-h-screen pt-6 mt-8 border-t md:border-t-0 md:w-2/3 md:mx-auto">
       {/* image updation */}
@@ -35,8 +123,10 @@ const EditProfile = () => {
             type="text"
             name="name"
             defaultValue={name}
+            onChange={changeHandler}
             className="py-1 border md:col-start-2 md:col-end-7"
           />
+          {errors.name && errors.name.length >0 ? <div className='text-xs text-red-500'>{errors.name}</div>  :''}
 
           <p className="mt-4 leading-3 text-gray-500 md:col-start-1 md:col-end-7">
             <small>
@@ -59,6 +149,7 @@ const EditProfile = () => {
             type="text"
             name="username"
             defaultValue={username}
+            onChange={changeHandler}
             className="py-1 border md:col-start-2 md:col-end-7"
           />
           <p className="mt-4 leading-3 text-gray-500 md:col-start-1 md:col-end-7">
@@ -80,8 +171,10 @@ const EditProfile = () => {
             type="text"
             name="website"
             defaultValue={website}
+            onChange={changeHandler}
             className="py-1 border md:col-start-2 md:col-end-7"
           />
+        
         </div>
         {/* Bio */}
         <div className="grid grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
@@ -94,6 +187,7 @@ const EditProfile = () => {
           <textarea
             name="bio"
             defaultValue={bio}
+            onChange={changeHandler}
             className="py-1 border md:col-start-2 md:col-end-7"
           >
           </textarea>
@@ -121,9 +215,10 @@ const EditProfile = () => {
             type="text"
             name="email"
             defaultValue={email}
+            onChange={changeHandler}
             className="py-1 border md:col-start-2 md:col-end-7"
           />
-
+  {errors.email && errors.email.length >0 ? <div className='text-xs text-red-500'>{errors.email}</div>  :''}
           <label
             htmlFor="phone"
             className="mt-3 font-medium text-md md:col-start-1 md:col-end-2"
@@ -135,6 +230,7 @@ const EditProfile = () => {
             type="text"
             name="phone"
             defaultValue={phone}
+            onChange={changeHandler}
             className="py-1 border md:h-2/3 md:col-start-2 md:col-end-7"
           />
 
@@ -148,12 +244,13 @@ const EditProfile = () => {
             type="text"
             name="gender"
             defaultValue={gender}
+            onChange={changeHandler}
             className="py-1 border md:col-start-2 md:col-end-7"
           />
         </div>
         {/* Similar account suggestions */}
         <div className="mx-4 mt-8 mb-3 name_edit md:grid-cols-6">
-          <button className="px-3 py-1 text-sm font-medium text-white bg-blue-300 rounded">
+          <button onClick={submithandler} className="px-3 py-1 text-sm font-medium text-white bg-blue-300 rounded">
             Submit
           </button>
         </div>

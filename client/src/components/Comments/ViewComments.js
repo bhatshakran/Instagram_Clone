@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments } from "../../redux/features/Comments/comments";
+import { getComments } from "../../redux/features/comments/comments";
 import Comment from "./Comment";
 import Loading from "../../utils/Loading";
 

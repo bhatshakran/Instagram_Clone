@@ -1,7 +1,7 @@
 import React, {  useRef, useState } from "react";
 import { EmojiButton } from '@joeattardi/emoji-button';
 import { useDispatch } from "react-redux";
-import { createComment } from "../../redux/features/Comments/comments";
+import { createComment } from "../../redux/features/comments/comments";
 
 const Comment = ({ postid }) => {
   const dispatch = useDispatch();

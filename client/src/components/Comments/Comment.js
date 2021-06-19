@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteComment } from "../../redux/features/Comments/comments";
+import { deleteComment } from "../../redux/features/comments/comments";
 import Loading from "../../utils/Loading";
 
 const Comment = ({ name, text,p_id, id }) => {
