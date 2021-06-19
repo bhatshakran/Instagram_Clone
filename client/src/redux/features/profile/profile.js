@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 export const updateProfile = createAsyncThunk(
   "/updateprofile",
   async (data) => {
@@ -40,6 +41,7 @@ export const updateProfile = createAsyncThunk(
         body,
         config
       );
+
       return res.data;
     } catch (err) {
       console.error(err);

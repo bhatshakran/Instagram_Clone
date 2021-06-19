@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getcurrentuser } from "../../redux/features/auth/auth";
 import { updateProfile } from "../../redux/features/profile/profile";
+import { useHistory } from "react-router-dom";
 
 
 const EditProfile = () => {
   const dispatch = useDispatch();
+  const history = useHistory()
   useEffect(()=>{
       dispatch(getcurrentuser())
   }, [])
@@ -64,51 +66,40 @@ const EditProfile = () => {
       }
     }
 
-    const submithandler = () => {
+    const submithandler = async () => {
       let getdata = {
-        name:formdata.name,
-        email:formdata.email,
-        username:formdata.username,
-        bio:formdata.bio,
-        website:formdata.website,
-        gender:formdata.gender,
-        phone:formdata.phone
-      }
-   
-      // handle validation
-      validation()
+        name: formdata.name,
+        email: formdata.email,
+        username: formdata.username,
+        bio: formdata.bio,
+        website: formdata.website,
+        gender: formdata.gender,
+        phone: formdata.phone,
+      };
 
+      // handle validation
+      validation();
 
       // before submitting check if name and email were not changed at all & set their values
       // to the default db value
-      
-      function setundefinedtovalue  () {
+
+      function setundefinedtovalue() {
         for (const field in getdata) {
           if (getdata[field] === undefined) {
             getdata = { ...getdata, [field]: user[field] };
-         
           }
         }
       }
-      if(errors.name === '' && errors.email === ''){
+      if (errors.name === "" && errors.email === "") {
         setundefinedtovalue();
         getdata = { ...getdata, _id };
         // console.log(getdata)
-        dispatch(updateProfile(getdata));
-      }else{
-        console.log('Cant proceed')
+        await dispatch(updateProfile(getdata));
+        history.push('/profile')
+      } else {
+        console.log("Cant proceed");
       }
-     
-      
-      
-
-   
-
-      
-    
-
-     
-    }
+    };
 
 
 
