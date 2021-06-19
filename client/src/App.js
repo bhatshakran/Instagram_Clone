@@ -11,6 +11,7 @@ import Bottombar from "./components/Layout/Bottombar";
 import ViewComments from "./components/Comments/ViewComments";
 import Profile from "./components/Profile/Profile";
 import EditProfile from "./components/Profile/EditProfile";
+import User from "./components/User/User";
 
 function App() {
   let token = useSelector((state) => state.auth);
@@ -87,6 +88,16 @@ function App() {
               return <Redirect to="/login" />;
             } else {
               return <EditProfile {...props} />;
+            }
+          }}
+        />
+        <Route
+          path="/user/:id"
+          render={(props) => {
+            if (!auth) {
+              return <Redirect to="/login" />;
+            } else {
+              return <User {...props} />;
             }
           }}
         />

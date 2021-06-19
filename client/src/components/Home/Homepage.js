@@ -31,6 +31,7 @@ return <div className="flex items-center justify-center h-screen ">
             title={post.title}
             postid={post._id}
             lykes={post.likes}
+            id={post.postedBy}
             key={post._id}
           />
         );

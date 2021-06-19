@@ -118,6 +118,23 @@ router.get('/currentuser', auth, async(req, res) =>{
   }
 })
 
+// @route GET api/auth/user/:id
+// @desc Get current user
+// @access Private
+router.get('/user/:id', auth, async(req, res) =>{
+  try {
+    let user = await User.findById(req.params.id).select("-password");
+    res.json(user)
+    
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+
+
+
 // @route GET api/auth/followers/:id
 // @desc Get a users followers
 // @access Private

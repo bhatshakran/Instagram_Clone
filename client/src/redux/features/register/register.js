@@ -15,6 +15,35 @@ export const registerUser = createAsyncThunk("/api/users", async (values) => {
   return response;
 });
 
+
+
+// get users profile
+export const getuserdetails = createAsyncThunk('getuserdetails', async(id) =>{
+  try {
+    const setAuthToken = token =>{
+      if (token) {
+        axios.defaults.headers.common["x-auth-token"] = token;
+      } else {
+        delete axios.defaults.headers.common["x-auth-token"];
+      }
+    }
+
+    if(localStorage.token) {
+      setAuthToken(localStorage.token)
+  }
+
+    const res = await axios.get(`/api/auth/user/${id}`);
+    return res.data
+    
+    
+  } catch (err) {
+    console.error(err.message)
+    console.log('Cannot fetch the user!')
+  }
+})
+
+
+// register slice
 export const registerSlice = createSlice({
   name: "users",
   initialState: {
@@ -30,6 +59,11 @@ export const registerSlice = createSlice({
       state.loading = false;
       state.user = action.payload.values;
       state.message = action.payload.msg;
+    },
+    [getuserdetails.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.message = "User fetched!";
+      state.user = action.payload;
     },
   },
 });

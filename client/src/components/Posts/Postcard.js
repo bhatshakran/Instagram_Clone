@@ -5,7 +5,7 @@ import Comment from "./Comment";
 import { Link } from "react-router-dom";
 
 
-const Postcard = ({ image, name, title, body, postid }) => {
+const Postcard = ({ image, name, title, body, postid, id }) => {
   const [postlikes, setpostlikes] = useState();
   const currentUserID = useSelector((state) => state.posts.user._id);
   const dispatch = useDispatch();
@@ -13,18 +13,20 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const [formstate, setFormstate] = useState(false);
   const [subscribed, setSubscribed] = useState();
 
-
   // get post likes
   const getPostLikes = async () => {
     const res = await dispatch(getLikesById(postid));
     const likes = res.payload;
     setpostlikes(likes.length);
-    return likes;  };
+    return likes;
+  };
 
   //  check if i have liked the post or not
   const checkIfILiked = async () => {
     const likes = await getPostLikes();
-    const myLike = likes.filter((like) => like.user.toString() === currentUserID);
+    const myLike = likes.filter(
+      (like) => like.user.toString() === currentUserID
+    );
     return { likes, myLike };
   };
 
@@ -62,28 +64,26 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const displayHeart = async () => {
     if (subscribed) {
       const { myLike } = await checkIfILiked();
-    
-   
-   if(subscribed && heartRef.current !== null){
-    if ( myLike.length >= 1) {
-      heartRef.current.classList.remove("hollow");
-      heartRef.current.classList.add("filled");
-    } else {
-      heartRef.current.classList.remove("filled");
-      heartRef.current.classList.add("hollow");
+
+      if (subscribed && heartRef.current !== null) {
+        if (myLike.length >= 1) {
+          heartRef.current.classList.remove("hollow");
+          heartRef.current.classList.add("filled");
+        } else {
+          heartRef.current.classList.remove("filled");
+          heartRef.current.classList.add("hollow");
+        }
+      }
     }
-   }
-  }
   };
 
   // display comment form function
   const displayCommentForm = () => {
-    window.scrollTo(0,window.scrollY+50)
-    setFormstate(!formstate)
-    
-  }
+    window.scrollTo(0, window.scrollY + 50);
+    setFormstate(!formstate);
+  };
   displayHeart();
-  
+
   useEffect(async () => {
     setSubscribed(true);
     if (subscribed) {
@@ -100,7 +100,9 @@ const Postcard = ({ image, name, title, body, postid }) => {
     <div className="pb-4 mb-4 border border-gray-200 rounded-sm shadow-sm postcard">
       <div className="px-16 pt-1 border-b top">
         <h4>
-          <strong>{name}</strong>
+          <Link to={`/user/${id}`}>
+            <strong>{name}</strong>
+          </Link>
         </h4>
         <h5>
           <small>{title}</small>
@@ -178,7 +180,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
       </div>
     </div>
   );
-}
+};
 
 
 export default Postcard;
