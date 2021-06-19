@@ -34,19 +34,25 @@ const userSchema = new mongoose.Schema({
   },
   followers: [
     {
-      user: {
+      id: {
         type: ObjectId,
-        ref: "user",
+        ref: "user"
       },
-    },
+      name:{
+        type: String
+      }
+    } 
   ],
   following: [
     {
-      user: {
+      id: {
         type: ObjectId,
-        ref: "user",
+        ref: "user"
       },
-    },
+      name:{
+        type:String
+      }
+    }
   ],
 });
 

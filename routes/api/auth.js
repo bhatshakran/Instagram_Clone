@@ -118,4 +118,69 @@ router.get('/currentuser', auth, async(req, res) =>{
   }
 })
 
+// @route GET api/auth/followers/:id
+// @desc Get a users followers
+// @access Private
+router.get('/followers/:id', auth, async(req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+
+    res.json(user.followers)
+    
+  } catch (err) {
+    console.error(err.message)
+    console.log('Server Error')
+  }
+})
+
+
+
+
+
+// @route GET api/auth/following/:id
+// @desc Get a users following
+// @access Private
+router.get('/following/:id', auth, async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    
+
+    res.json(user.following)
+
+    
+  } catch (err) {
+    console.error(err.message)
+    console.log('Server Error')
+  }
+})
+
+// @route GET api/auth/follow/:id
+// @desc Follow a user
+// @access Private
+router.put('/follow/:id', auth, async(req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    
+    // Check if the current user follows the targeted user or not
+    if(user.followers.filter(follower => follower.user.toString() === req.user.id).length > 0){
+      return res.status(400).json("You already follow the user!")
+    }
+    const newFollower = { 
+      name:user.name,
+      id:req.user.id
+    }
+    user.followers.unshift(newFollower)
+
+    await user.save()
+
+    res.json(user.followers)
+
+    
+    
+  } catch (err) {
+    console.error(err.message)
+    console.log('Server Error')
+  }
+})
+
 module.exports = router;
