@@ -1,0 +1,34 @@
+self.__precacheManifest = [
+  {
+    "revision": "29876a0a91c642d533ed",
+    "url": "/static/css/main.0cab307b.chunk.css"
+  },
+  {
+    "revision": "29876a0a91c642d533ed",
+    "url": "/static/js/main.ac33fa6a.chunk.js"
+  },
+  {
+    "revision": "42ac5946195a7306e2a5",
+    "url": "/static/js/runtime~main.a8a9905a.js"
+  },
+  {
+    "revision": "3e281586d8d92462c9a1",
+    "url": "/static/js/2.0f3070b2.chunk.js"
+  },
+  {
+    "revision": "cfa70481f7385058708abf5d8e59ff29",
+    "url": "/static/media/Rocket.cfa70481.gif"
+  },
+  {
+    "revision": "95f2338a8ddd7c2bbff691f066a04686",
+    "url": "/static/media/heart_filled.95f2338a.png"
+  },
+  {
+    "revision": "bed171f38bc538c188efa49f41318255",
+    "url": "/static/media/heart.bed171f3.png"
+  },
+  {
+    "revision": "dfb6afe15bf586827ae4bb3d3d873860",
+    "url": "/index.html"
+  }
+];
