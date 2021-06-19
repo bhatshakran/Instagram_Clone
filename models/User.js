@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    required: true,
   },
   website: {
     type: String,
@@ -29,10 +28,8 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
-
   profilepic: {
-    type: String,
-    default: "no pic",
+    type: String, 
   },
 });
 

@@ -23,7 +23,7 @@ const EditProfile = () => {
           <label htmlFor="name" className="font-medium text-md md:col-start-1 md:col-end-2">
             Name
           </label>
-          <input type="text" name="name" id="" className="py-1 border md:col-start-2 md:col-end-7" />
+          <input type="text" name="name"  className="py-1 border md:col-start-2 md:col-end-7" />
          
           <p className="mt-4 leading-3 text-gray-500 md:col-start-1 md:col-end-7">
             <small>
@@ -39,7 +39,7 @@ const EditProfile = () => {
           <label htmlFor="username" className="font-medium text-md md:col-start-1 md:col-end-2">
             Username
           </label>
-          <input type="text" name="username" id="" className="py-1 border md:col-start-2 md:col-end-7" />
+          <input type="text" name="username"  className="py-1 border md:col-start-2 md:col-end-7" />
           <p className="mt-4 leading-3 text-gray-500 md:col-start-1 md:col-end-7">
             <small>
               In most cases, you'll be able to change your username back to
@@ -59,7 +59,7 @@ const EditProfile = () => {
           <label htmlFor="bio" className="font-medium text-md md:col-start-1 md:col-end-2">
             Bio
           </label>
-          <textarea name="bio" id="" className="py-1 border md:col-start-2 md:col-end-7"></textarea>
+          <textarea name="bio"  className="py-1 border md:col-start-2 md:col-end-7"></textarea>
         </div>
         {/* Personal Information */}
         <div className="grid grid-cols-1 mx-4 mt-8 name_edit">
@@ -77,18 +77,18 @@ const EditProfile = () => {
           <label htmlFor="email" className="font-medium text-md md:col-start-1 md:col-end-2">
             Email
           </label>
-          <input type="text" name="email" id="" className="py-1 border md:col-start-2 md:col-end-7" />
+          <input type="text" name="email"  className="py-1 border md:col-start-2 md:col-end-7" />
 
           <label htmlFor="phone" className="mt-3 font-medium text-md md:col-start-1 md:col-end-2">
             Phone Number
           </label>
 
-          <input type="text" name="phone" id="" className="py-1 border md:h-2/3 md:col-start-2 md:col-end-7" />
+          <input type="text" name="phone"  className="py-1 border md:h-2/3 md:col-start-2 md:col-end-7" />
 
           <label htmlFor="gender" className="mt-3 font-medium text-md md:col-start-1 md:col-end-2">
             Gender
           </label>
-          <input type="text" name="gender" id="" className="py-1 border md:col-start-2 md:col-end-7" />
+          <input type="text" name="gender"  className="py-1 border md:col-start-2 md:col-end-7" />
         </div>
         {/* Similar account suggestions */}
         <div className="mx-4 mt-8 mb-3 name_edit md:grid-cols-6">

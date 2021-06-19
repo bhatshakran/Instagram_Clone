@@ -3,8 +3,17 @@ import emo from "../../images/emo.jpeg";
 import gyal from "../../images/gyal.jpeg";
 import shore from "../../images/shore.jpeg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const user = useSelector((state) => state.auth.user);
+  const parseduser = JSON.parse(user);
+
+  const { name, phone, profilepic, username, website, bio, gender } =
+    parseduser;
+
+
+
   return (
     <div className="min-h-screen">
       <div className="grid grid-cols-3 px-4 mt-10 sm:grid-cols-6 name_section md:items-start md:grid-cols-9 md:h-12">
@@ -18,7 +27,7 @@ const Profile = () => {
         {/* edit and name */}
 
         <div className="col-span-2 col-end-4 edit sm:col-start-2 sm:col-end-7 md:flex md:items-center md:gap-6 md:col-start-3">
-          <div className="text-xl name md:text-2xl"> shakran._.bhat</div>
+          <div className="text-xl name md:text-2xl"> {username}</div>
           <div className="mt-4 edit_profile md:mt-0 ">
             <button className="w-full border rounded-sm md:px-3 font-regular md:min-w-1/5 md:max-w-2/5">
               <Link to="/editprofile"> Edit Profile</Link>
@@ -49,16 +58,10 @@ const Profile = () => {
       {/* info section */}
       <div className="px-4 mt-4 xl:w-2/3 info_section md:ml-52 md:mt-0 lg:ml-52 lg:pl-6 xl:ml-64 xl:pl-8 2xl:ml-80 2xl:pl-6">
         <div className="name">
-          <strong>Shaqran</strong>{" "}
+          <strong>{name}</strong>{" "}
         </div>
         <div className="about">
-          Knock, & He'll open the door
-          <br />
-          Vanish, & He'll make u shine like the sun
-          <br />
-          Fall, & He'll raise u 2 the heavens
-          <br />
-          Bcome nothin, & He'll turn u into everythin
+          {bio}
         </div>
       </div>
 
@@ -83,17 +86,17 @@ const Profile = () => {
 
       {/* images grid */}
       <div className="grid grid-cols-3 gap-1 images-section md:mt-32 md:h-80 md:grid-cols-4 ">
-        <div className="img-compt" >
-          <img src={emo} alt="" className='md:h-80'/>
+        <div className="img-compt">
+          <img src={emo} alt="" className="md:h-80" />
         </div>
         <div className="img-compt">
-          <img src={gyal} alt="" className='md:h-80'/>
+          <img src={gyal} alt="" className="md:h-80" />
         </div>
         <div className="img-compt">
-          <img src={shore} alt="" className='md:h-80' />
+          <img src={shore} alt="" className="md:h-80" />
         </div>
-        <div className="img-compt" >
-          <img src={emo} alt="" className='md:h-80'/>
+        <div className="img-compt">
+          <img src={emo} alt="" className="md:h-80" />
         </div>
       </div>
     </div>

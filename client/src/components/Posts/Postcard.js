@@ -81,20 +81,17 @@ const Postcard = ({ image, name, title, body, postid }) => {
   }
 
   
-  useEffect( ()=>{
-    
-    
-    if  (subscribed)  {
-      
-      getPostLikes();
-      displayHeart()
+  useEffect(async () => {
+    if (subscribed) {
+      await getPostLikes();
+      displayHeart();
     }
 
     //  Cleanup function
     return () => {
-      setSubscribed(false)
+      setSubscribed(false);
     };
-  }, [])
+  }, []);
 
   return (
     <div className="pb-4 mb-4 border border-gray-200 rounded-sm shadow-sm postcard">

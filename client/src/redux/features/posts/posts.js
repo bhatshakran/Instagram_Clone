@@ -7,6 +7,7 @@ export const uploadPic = createAsyncThunk("/cloudinary", async (file) => {
   let formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", "insta_clone");
+  // formData.append("folder", "profilepics");
   delete axios.defaults.headers.common["x-auth-token"];
   const config = {
     headers: {

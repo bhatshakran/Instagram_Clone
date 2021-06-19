@@ -88,5 +88,20 @@ router.post("/",
   }
 
 });
+// @route PUT api/auth/editprofile
+// @desc Edit User Profile
+// @access Private
+router.patch('/editprofile/:id', auth, async(req, res) =>{
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body);
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+
+
+})
 
 module.exports = router;

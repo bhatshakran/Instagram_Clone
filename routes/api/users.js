@@ -23,16 +23,16 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ Errors: errors.array() });
     } else {
-      const { name, email, password } = req.body;
+      const {  
+           name,email,password,username,profilepic, bio,website,gender,phone} = req.body;
 
-
-    //   Check if user exists with that email
+      //   Check if user exists with that email
       try {
-        let user = await User.findOne({ email })
+        let user = await User.findOne({ email });
         if (user) {
           return res
             .status(400)
-            .json({ errors: [{ msg: "User already exists with that email" }] })
+            .json({ errors: [{ msg: "User already exists with that email" }] });
         }
         // Create new user with that email
         user = new User({
@@ -49,24 +49,14 @@ router.post(
 
         // We dont want plain text passwords
         // So we will hash them using bcrypt
-        
-        const salt = await bcrypt.genSalt(10)
 
-        user.password = await bcrypt.hash(password, salt)
+        const salt = await bcrypt.genSalt(10);
 
-        await user.save()
+        user.password = await bcrypt.hash(password, salt);
 
-        res.status(200).json({"message":"User registered"});
+        await user.save();
 
-
-
-        
-
-
-
-
-
-
+        res.status(200).json({ message: "User registered" });
       } catch (err) {
         console.error(err.message);
         res.status(500).send("Server error");
