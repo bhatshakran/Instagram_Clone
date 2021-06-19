@@ -60,6 +60,9 @@ export const registerSlice = createSlice({
       state.user = action.payload.values;
       state.message = action.payload.msg;
     },
+    [getuserdetails.pending]: (state, action) => {
+      state.loading = true;
+    },
     [getuserdetails.fulfilled]: (state, action) => {
       state.loading = false;
       state.message = "User fetched!";
