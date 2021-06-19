@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
-import emo from "../../images/emo.jpeg";
-import gyal from "../../images/gyal.jpeg";
-import shore from "../../images/shore.jpeg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getcurrentuser } from "../../redux/features/auth/auth";
 import { getmyposts } from "../../redux/features/profile/profile";
-
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -88,7 +84,7 @@ const Profile = () => {
       </div>
 
       {/* images grid */}
-      <div className="grid grid-cols-3 gap-1 mx-auto images-section h-72 md:mt-32 md:h-80 md:grid-cols-4 ">
+      <div className="grid grid-cols-3 gap-1 mx-auto mt-8 images-section h-72 md:mt-32 md:h-80 md:grid-cols-4 ">
         {userposts.map(({ image }) => {
           return (
             <div className="flex items-center justify-center md:w-56 img-compt h-72">
@@ -96,7 +92,6 @@ const Profile = () => {
             </div>
           );
         })}
-
       </div>
     </div>
   );
