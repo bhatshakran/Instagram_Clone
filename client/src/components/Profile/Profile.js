@@ -5,18 +5,19 @@ import shore from "../../images/shore.jpeg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getcurrentuser } from "../../redux/features/auth/auth";
+import { getmyposts } from "../../redux/features/profile/profile";
+
 
 const Profile = () => {
   const dispatch = useDispatch();
-  useEffect(()=>{
-      dispatch(getcurrentuser())
-  }, [])
+  useEffect(() => {
+    dispatch(getcurrentuser());
+    dispatch(getmyposts());
+  }, []);
   const user = useSelector((state) => state.auth.user);
-  
+  const userposts = useSelector((state) => state.profile.userposts);
 
   const { name, username, bio, profilepic } = user;
-
-
 
   return (
     <div className="min-h-screen">
@@ -87,19 +88,15 @@ const Profile = () => {
       </div>
 
       {/* images grid */}
-      <div className="grid grid-cols-3 gap-1 images-section md:mt-32 md:h-80 md:grid-cols-4 ">
-        <div className="img-compt">
-          <img src={emo} alt="" className="md:h-80" />
-        </div>
-        <div className="img-compt">
-          <img src={gyal} alt="" className="md:h-80" />
-        </div>
-        <div className="img-compt">
-          <img src={shore} alt="" className="md:h-80" />
-        </div>
-        <div className="img-compt">
-          <img src={emo} alt="" className="md:h-80" />
-        </div>
+      <div className="grid grid-cols-3 gap-1 mx-auto images-section h-72 md:mt-32 md:h-80 md:grid-cols-4 ">
+        {userposts.map(({ image }) => {
+          return (
+            <div className="flex items-center justify-center md:w-56 img-compt h-72">
+              <img src={image} alt="" className="h-72 md:h-80" key={image} />
+            </div>
+          );
+        })}
+
       </div>
     </div>
   );

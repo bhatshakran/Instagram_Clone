@@ -78,16 +78,15 @@ export const updateProfile = createAsyncThunk(
 
 
 // get my posts
-export const getmyposts = createAsyncThunk('getmyposts/', async() => {
+export const getmyposts = createAsyncThunk("getmyposts", async () => {
   try {
-    const res = await axios.get('/api/posts/myposts')
-    return res;
-    
+    const res = await axios.get("/api/posts/myposts");
+    return res.data;
   } catch (err) {
-    console.error(err)
-    console.log('Couldn\'t fetch your posts')
+    console.error(err);
+    console.log("Couldn't fetch your posts");
   }
-})
+});
 
 
 
@@ -109,13 +108,15 @@ export const profileSlice = createSlice({
     },
     [uploadProfilePic.fulfilled]: (state, action) => {
       state.loading = false
-    }
-  },
+    },
+  
     [getmyposts.fulfilled] : (state, action) => {
+
       state.loading = false;
-      state.userposts =action.payload;
+      state.userposts = action.payload;
       state.message = 'Fetched your posts!'
     }
+  }
 });
 
 export default profileSlice.reducer;
