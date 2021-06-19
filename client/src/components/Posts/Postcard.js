@@ -11,7 +11,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
   const dispatch = useDispatch();
   const heartRef = useRef();
   const [formstate, setFormstate] = useState(false);
-  const [subscribed, setSubscribed] = useState(true);
+  const [subscribed, setSubscribed] = useState();
 
 
   // get post likes
@@ -60,7 +60,10 @@ const Postcard = ({ image, name, title, body, postid }) => {
 
   // display heart icon
   const displayHeart = async () => {
-    const { myLike } = await checkIfILiked();
+    if (subscribed) {
+      const { myLike } = await checkIfILiked();
+    
+   
    if(subscribed && heartRef.current !== null){
     if ( myLike.length >= 1) {
       heartRef.current.classList.remove("hollow");
@@ -70,7 +73,7 @@ const Postcard = ({ image, name, title, body, postid }) => {
       heartRef.current.classList.add("hollow");
     }
    }
-   
+  }
   };
 
   // display comment form function
@@ -79,12 +82,12 @@ const Postcard = ({ image, name, title, body, postid }) => {
     setFormstate(!formstate)
     
   }
-
+  displayHeart();
   
   useEffect(async () => {
+    setSubscribed(true);
     if (subscribed) {
       await getPostLikes();
-      displayHeart();
     }
 
     //  Cleanup function
