@@ -66,6 +66,8 @@ const EditProfile = () => {
       }
     }
 
+
+    // Submit handler function
     const submithandler = async () => {
       let getdata = {
         name: formdata.name,
@@ -111,10 +113,10 @@ const EditProfile = () => {
     <div className="min-h-screen pt-6 mt-8 border-t md:border-t-0 md:w-2/3 md:mx-auto">
       {/* image updation */}
       <div className="grid items-center grid-cols-9 image_editing ">
-        <div className="px-3 image">
+        <div className="px-3 mr-4 ">
           <img src={profilepic} alt="" className="w-10 h-10 rounded-full" />
         </div>
-        <div className="col-start-2 col-end-11 name">
+        <div className="col-start-2 col-end-11 ml-8 sm:ml-0 name">
           <p className="text-lg"> shakran._.bhat</p>
           <button className="text-sm font-medium text-instablue-default">
             Change Profile Picture
@@ -123,7 +125,7 @@ const EditProfile = () => {
       </div>
       <div className="w-3/4 ">
         {/* name updation */}
-        <div className="grid grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
+        <div className="grid items-center grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
           <label
             htmlFor="name"
             className="font-medium text-md md:col-start-1 md:col-end-2"
@@ -135,7 +137,7 @@ const EditProfile = () => {
             name="name"
             defaultValue={name}
             onChange={changeHandler}
-            className="py-1 border md:col-start-2 md:col-end-7"
+            className="px-4 py-1 border md:col-start-2 md:col-end-7"
           />
           {errors.name && errors.name.length >0 ? <div className='text-xs text-red-500'>{errors.name}</div>  :''}
 
@@ -149,7 +151,7 @@ const EditProfile = () => {
           </p>
         </div>
         {/* username updation */}
-        <div className="grid grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6 md:gap-x-20">
+        <div className="grid items-center grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6 md:gap-x-20">
           <label
             htmlFor="username"
             className="font-medium text-md md:col-start-1 md:col-end-2"
@@ -161,7 +163,7 @@ const EditProfile = () => {
             name="username"
             defaultValue={username}
             onChange={changeHandler}
-            className="py-1 border md:col-start-2 md:col-end-7"
+            className="px-4 py-1 border md:col-start-2 md:col-end-7"
           />
           <p className="mt-4 leading-3 text-gray-500 md:col-start-1 md:col-end-7">
             <small>
@@ -171,7 +173,7 @@ const EditProfile = () => {
           </p>
         </div>
         {/* website */}
-        <div className="grid grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
+        <div className="grid items-center grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
           <label
             htmlFor="webiste"
             className="font-medium text-md md:col-start-1 md:col-end-2"
@@ -183,12 +185,12 @@ const EditProfile = () => {
             name="website"
             defaultValue={website}
             onChange={changeHandler}
-            className="py-1 border md:col-start-2 md:col-end-7"
+            className="px-4 py-1 border md:col-start-2 md:col-end-7"
           />
         
         </div>
         {/* Bio */}
-        <div className="grid grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
+        <div className="grid items-center grid-cols-1 mx-4 mt-8 name_edit md:grid-cols-6">
           <label
             htmlFor="bio"
             className="font-medium text-md md:col-start-1 md:col-end-2"
@@ -199,12 +201,12 @@ const EditProfile = () => {
             name="bio"
             defaultValue={bio}
             onChange={changeHandler}
-            className="py-1 border md:col-start-2 md:col-end-7"
+            className="px-4 py-1 border md:col-start-2 md:col-end-7"
           >
           </textarea>
         </div>
         {/* Personal Information */}
-        <div className="grid grid-cols-1 mx-4 mt-8 name_edit">
+        <div className="grid items-center grid-cols-1 mx-4 mt-8 name_edit">
           <h3 className="text-gray-500 ">Personal Information</h3>
           <p className="mt-2 leading-3 text-gray-500 md:col-start-1 md:col-end-7">
             <small>
@@ -215,7 +217,7 @@ const EditProfile = () => {
           </p>
         </div>
         {/* Email and phone number*/}
-        <div className="grid grid-cols-1 gap-2 mx-4 mt-8 name_edit md:grid-cols-6 md:items-center">
+        <div className="grid items-center grid-cols-1 gap-2 mx-4 mt-8 name_edit md:grid-cols-6 md:items-center">
           <label
             htmlFor="email"
             className="font-medium text-md md:col-start-1 md:col-end-2"
@@ -227,7 +229,7 @@ const EditProfile = () => {
             name="email"
             defaultValue={email}
             onChange={changeHandler}
-            className="py-1 border md:col-start-2 md:col-end-7"
+            className="px-4 py-1 border md:col-start-2 md:col-end-7"
           />
   {errors.email && errors.email.length >0 ? <div className='text-xs text-red-500'>{errors.email}</div>  :''}
           <label
@@ -242,7 +244,7 @@ const EditProfile = () => {
             name="phone"
             defaultValue={phone}
             onChange={changeHandler}
-            className="py-1 border md:h-2/3 md:col-start-2 md:col-end-7"
+            className="px-4 py-1 border md:h-2/3 md:col-start-2 md:col-end-7"
           />
 
           <label
@@ -256,7 +258,7 @@ const EditProfile = () => {
             name="gender"
             defaultValue={gender}
             onChange={changeHandler}
-            className="py-1 border md:col-start-2 md:col-end-7"
+            className="px-4 py-1 capitalize border md:col-start-2 md:col-end-7"
           />
         </div>
         {/* Similar account suggestions */}
