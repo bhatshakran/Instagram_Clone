@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import emo from "../../images/emo.jpeg";
 import gyal from "../../images/gyal.jpeg";
 import shore from "../../images/shore.jpeg";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getcurrentuser } from "../../redux/features/auth/auth";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  useEffect(()=>{
+      dispatch(getcurrentuser())
+  }, [])
   const user = useSelector((state) => state.auth.user);
-  const parseduser = JSON.parse(user);
+  
 
-  const { name, username, bio } = parseduser;
+  const { name, username, bio } = user;
 
 
 
