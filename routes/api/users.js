@@ -40,6 +40,11 @@ router.post(
           email,
           password,
           profilepic,
+          username,
+          website,
+          bio,
+          phone,
+          gender,
         });
 
         // We dont want plain text passwords

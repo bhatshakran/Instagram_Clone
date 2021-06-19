@@ -13,6 +13,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  bio: {
+    type: String,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  website: {
+    type: String,
+  },
+  phone: {
+    type: Number,
+  },
+  gender: {
+    type: String,
+  },
+
   profilepic: {
     type: String,
     default: "no pic",
