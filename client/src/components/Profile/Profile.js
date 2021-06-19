@@ -9,8 +9,7 @@ const Profile = () => {
   const user = useSelector((state) => state.auth.user);
   const parseduser = JSON.parse(user);
 
-  const { name, phone, profilepic, username, website, bio, gender } =
-    parseduser;
+  const { name, username, bio } = parseduser;
 
 
 

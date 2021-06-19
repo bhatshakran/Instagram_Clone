@@ -93,9 +93,9 @@ router.post("/",
 // @access Private
 router.patch('/editprofile/:id', auth, async(req, res) =>{
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body);
+    let user = await User.findByIdAndUpdate(req.params.id, req.body);
     await user.save();
-    res.json(user);
+    res.json(await User.findById(req.params.id));
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server Error')
