@@ -43,6 +43,38 @@ export const getuserdetails = createAsyncThunk('getuserdetails', async(id) =>{
 })
 
 
+// Follow user
+export const followuser = createAsyncThunk('followuser', async(data)=>{
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const setAuthToken = token =>{
+      if (token) {
+        axios.defaults.headers.common["x-auth-token"] = token;
+      } else {
+        delete axios.defaults.headers.common["x-auth-token"];
+      }
+    }
+
+    if(localStorage.token) {
+      setAuthToken(localStorage.token)
+  }
+
+  const {id, name} = data;
+  const body = JSON.stringify({name})
+   
+    const res = await axios.put(`/api/auth/follow/${id}`, body, config )
+    return res.data
+  } catch (err) {
+    console.error(err.message)
+    console.log('Cannot follow user')
+  }
+})
+
+
 // register slice
 export const registerSlice = createSlice({
   name: "users",

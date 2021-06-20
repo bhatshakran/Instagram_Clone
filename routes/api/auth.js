@@ -176,21 +176,29 @@ router.get('/following/:id', auth, async (req, res) => {
 // @access Private
 router.put('/follow/:id', auth, async(req, res) => {
   try {
-    let user = await User.findById(req.params.id);
+    let user = await User.findById(req.params.id).select('-password, -email');
     
     // Check if the current user follows the targeted user or not
     if(user.followers.filter(follower => follower.user.toString() === req.user.id).length > 0){
       return res.status(400).json("You already follow the user!")
     }
-    const newFollower = { 
-      name:user.name,
-      id:req.user.id
-    }
+    const newFollower = {
+      name: req.body.name,
+      id: req.user.id,
+    };
     user.followers.unshift(newFollower)
 
     await user.save()
 
-    res.json(user.followers)
+    // Add the user to be followed to the current users following
+    let currentuser = await User.findById(req.user.id)
+
+    currentuser.following.unshift(user)
+
+
+    await currentuser.save()
+
+    res.json({followers:user.followers,currfollowing:currentuser.following })
 
     
     

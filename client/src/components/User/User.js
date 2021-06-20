@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getuserdetails } from "../../redux/features/register/register";
+import { followuser, getuserdetails } from "../../redux/features/register/register";
 import Loading from "../../utils/Loading";
 
 const User = (props) => {
@@ -11,7 +11,20 @@ const User = (props) => {
   }, []);
   const loading = useSelector((state) => state.users.loading)
   const userdetails = useSelector((state) => state.users.user);
+  const currentuser = useSelector((state) => state.auth.user);
+  const parsedcurruser = JSON.parse(currentuser)
+  const currname = parsedcurruser.name
+  
   const {name, bio, username, followers, following, profilepic} = userdetails;
+
+
+  const followhandler = () =>{
+    const data ={
+      id:props.match.params.id,
+      name:currname
+    }
+    dispatch(followuser(data))
+  }
 
 
 if(loading){
@@ -33,10 +46,13 @@ if(loading){
 
         <div className="col-span-2 col-end-4 edit sm:col-start-2 sm:col-end-7 md:flex md:items-center md:gap-6 md:col-start-3">
           <div className="text-xl name md:text-2xl"> {username}</div>
-          <div className="mt-4 edit_profile md:mt-0 ">
+          <div className="flex items-center gap-4 mt-4 edit_profile md:mt-0">
             <button className="w-full border rounded-sm md:px-3 font-regular md:min-w-1/5 md:max-w-2/5">
               <Link to="/message"> Message</Link>
             </button>
+            <button
+            onClick={followhandler}
+             className='w-full ml-1 text-white bg-blue-300 rounded-sm hover:bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Follow</button>
           </div>
         </div>
       </div>
@@ -79,7 +95,7 @@ if(loading){
         })} */}
       </div>
     </div>
-  )
+  );
     }
 };
 
