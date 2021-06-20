@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,10 +10,19 @@ import Loading from "../../utils/Loading";
 
 const User = (props) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getuserdetails(props.match.params.id));
-    dispatch(getfollowdata(props.match.params.id));
+  const [subscribed, setsubscribed] = useState(true)
+
+  useEffect( () => {
+    // setsubscribed(true)
+    if(subscribed){
+      dispatch(getuserdetails(props.match.params.id));
+    }
+   return () =>{
+     setsubscribed(false)
+  
+   }
   }, []);
+  
   const loading = useSelector((state) => state.users.loading)
   // get targeted user details
   const userdetails = useSelector((state) => state.users.user);
@@ -24,7 +33,33 @@ const User = (props) => {
   
   const {name, bio, username, followers, following, profilepic} = userdetails;
 
+    // check if current user follows the targeted user or not
+    const checkFollow = () =>{
+     let length = Object.keys(userdetails).length;
+    if(length>0){
+      if(userdetails.followers.filter(follower => follower.name === currname).length > 0){
+        console.log(true)
+       return true
+      }else {
+        console.log(false)
+      return false
+      }
+    }
+    
+    }
 
+
+
+ 
+
+
+      
+    
+
+
+
+
+// follow unfollow handler function
   const followhandler = () =>{
     const data ={
       id:props.match.params.id,
@@ -32,6 +67,8 @@ const User = (props) => {
     }
     dispatch(followuser(data))
   }
+
+
 
 
 if(loading){
@@ -57,9 +94,14 @@ if(loading){
             <button className="w-full border rounded-sm md:px-3 font-regular md:min-w-1/5 md:max-w-2/5">
               <Link to="/message"> Message</Link>
             </button>
-            <button
-            onClick={followhandler}
-             className='w-full ml-1 text-white bg-blue-300 rounded-sm hover:bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Follow</button>
+            {checkFollow ? <button
+             onClick={followhandler}
+              className='w-full ml-1 text-white rounded-sm hover:bg-blue-300 bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Unfollow</button>:
+              <button
+              onClick={followhandler}
+               className='w-full ml-1 text-white bg-blue-300 rounded-sm hover:bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Follow</button>
+           }
+         
           </div>
         </div>
       </div>
