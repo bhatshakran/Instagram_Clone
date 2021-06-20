@@ -1,15 +1,15 @@
 {
-  "main.css": "/static/css/main.0cab307b.chunk.css",
-  "main.js": "/static/js/main.ac33fa6a.chunk.js",
-  "main.js.map": "/static/js/main.ac33fa6a.chunk.js.map",
+  "main.css": "/static/css/main.5571f87e.chunk.css",
+  "main.js": "/static/js/main.56e4d15a.chunk.js",
+  "main.js.map": "/static/js/main.56e4d15a.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
   "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
   "static/js/2.0f3070b2.chunk.js": "/static/js/2.0f3070b2.chunk.js",
   "static/js/2.0f3070b2.chunk.js.map": "/static/js/2.0f3070b2.chunk.js.map",
   "index.html": "/index.html",
-  "precache-manifest.45fbffb78f0c79cede694b8c80fc4282.js": "/precache-manifest.45fbffb78f0c79cede694b8c80fc4282.js",
+  "precache-manifest.52b89eef3a783f628e3c9dca76f44974.js": "/precache-manifest.52b89eef3a783f628e3c9dca76f44974.js",
   "service-worker.js": "/service-worker.js",
-  "static/css/main.0cab307b.chunk.css.map": "/static/css/main.0cab307b.chunk.css.map",
+  "static/css/main.5571f87e.chunk.css.map": "/static/css/main.5571f87e.chunk.css.map",
   "static/media/Rocket.gif": "/static/media/Rocket.cfa70481.gif",
   "static/media/index.css": "/static/media/heart_filled.95f2338a.png"
 }
