@@ -39,7 +39,7 @@ const EditProfile = () => {
 
 
 //  state for image file
-const [myfile, setMyfile] = useState([]);
+const [myfile, setMyfile] = useState(null);
 
 
 
@@ -86,6 +86,9 @@ const updateimagehandler = e =>{
     const submithandler = async () => {
       let profilepic;
       (async function () {
+    
+        
+        if(myfile!== null){
         console.log('Compression started')
         const options = {
           maxSizeMB: 1,
@@ -114,7 +117,7 @@ const updateimagehandler = e =>{
          profilepic =  res.payload.secure_url;
         console.log('Uploaded to Cloudinary')
        
-
+      }
          // input text fields  stuff from here
       let getdata = {
         name: formdata.name,
