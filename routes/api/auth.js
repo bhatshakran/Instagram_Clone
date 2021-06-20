@@ -119,7 +119,7 @@ router.get('/currentuser', auth, async(req, res) =>{
 })
 
 // @route GET api/auth/user/:id
-// @desc Get current user
+// @desc Get targeted user
 // @access Private
 router.get('/user/:id', auth, async(req, res) =>{
   try {
@@ -199,6 +199,58 @@ router.put('/follow/:id', auth, async(req, res) => {
     await currentuser.save()
 
     res.json({followers:user.followers,currfollowing:currentuser.following })
+
+    
+    
+  } catch (err) {
+    console.error(err.message)
+    console.log('Server Error')
+  }
+})
+
+
+// @route GET api/auth/unfollow/:id
+// @desc Unfollow a user
+// @access Private
+router.put('/unfollow/:id', auth, async(req, res) => {
+  try {
+    let user = await User.findById(req.params.id).select('-password, -email');
+    console.log(user)
+    console.log(req.user.id)
+    // Check if the current user follows the targeted user or not
+    if(user.followers.filter(follower => follower.id.toString() === req.user.id).length === 0){
+      return res.status(400).json("You do not follow the user!")
+    }
+
+    
+     // Get remove index
+     const removeIndex = user.followers
+     .map((follower) => follower.id.toString())
+     .indexOf(req.user.id);
+     console.log(removeIndex)
+     
+     
+    
+       // Splice the followers
+    user.followers.splice(removeIndex, 1);
+    // save the user
+    await user.save()
+   
+
+    // Remove the user  unfollowed from the current users following
+    let currentuser = await User.findById(req.user.id)
+console.log(currentuser)
+    // Get remove index
+    const removeIndex2 = currentuser.following
+    .map((following) => following._id.toString())
+    .indexOf(req.user.id);
+    
+    // Splice the following
+    currentuser.following.splice(removeIndex2, 1);
+
+      // save the user
+    await currentuser.save()
+    res.json({user, currentuser})
 
     
     

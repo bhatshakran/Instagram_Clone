@@ -39,24 +39,15 @@ const User = (props) => {
     if(length>0){
       if(userdetails.followers.filter(follower => follower.name === currname).length > 0){
         console.log(true)
-       return true
+       return true;
       }else {
         console.log(false)
-      return false
+      return false;
       }
     }
     
     }
-
-
-
- 
-
-
-      
-    
-
-
+    checkFollow()
 
 
 // follow unfollow handler function
@@ -65,7 +56,12 @@ const User = (props) => {
       id:props.match.params.id,
       name:currname
     }
-    dispatch(followuser(data))
+    if(checkFollow()){
+      console.log('unfollowing')
+    }else{
+      dispatch(followuser(data))
+    }
+    
   }
 
 
@@ -94,12 +90,13 @@ if(loading){
             <button className="w-full border rounded-sm md:px-3 font-regular md:min-w-1/5 md:max-w-2/5">
               <Link to="/message"> Message</Link>
             </button>
-            {checkFollow ? <button
+            {checkFollow() === false ?
+             (<button
              onClick={followhandler}
-              className='w-full ml-1 text-white rounded-sm hover:bg-blue-300 bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Unfollow</button>:
-              <button
-              onClick={followhandler}
-               className='w-full ml-1 text-white bg-blue-300 rounded-sm hover:bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Follow</button>
+              className='w-full ml-1 text-white bg-blue-300 rounded-sm hover:bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Follow</button>):
+              (<button
+               onClick={followhandler}
+                className='w-full ml-1 text-white rounded-sm hover:bg-blue-300 bg-instablue-default md:px-3 font-regular md:min-w-1/5 md:max-w-2/5'>Unfollow</button>)
            }
          
           </div>
