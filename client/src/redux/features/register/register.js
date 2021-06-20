@@ -74,6 +74,32 @@ export const followuser = createAsyncThunk('followuser', async(data)=>{
   }
 })
 
+// Followers and following data
+export const getfollowdata = createAsyncThunk('getfollowdata', async(id) =>{
+  try {
+    const setAuthToken = token =>{
+      if (token) {
+        axios.defaults.headers.common["x-auth-token"] = token;
+      } else {
+        delete axios.defaults.headers.common["x-auth-token"];
+      }
+    }
+
+    if(localStorage.token) {
+      setAuthToken(localStorage.token)
+  }
+    const res = await axios.get(`/api/auth/followers/${id}`);
+    const followers = res.data;
+    const res2 = await axios.get(`/api/auth/following/${id}`);
+    const following = res2.data;
+    return{followers, following}
+    
+  } catch (err) {
+    console.error(err.message)
+    console.log('Couldn\'t fetch user follow/unfollow data!')
+  }
+})
+
 
 // register slice
 export const registerSlice = createSlice({
@@ -83,6 +109,8 @@ export const registerSlice = createSlice({
     loading: true,
     user: {},
     message: "",
+    tar_followers:[],
+    tar_following:[]
   },
   reducers: {},
   extraReducers: {
@@ -100,6 +128,12 @@ export const registerSlice = createSlice({
       state.message = "User fetched!";
       state.user = action.payload;
     },
+    [getfollowdata.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.message = 'Fetched user follow data';
+      state.tar_followers = action.payload.followers;
+      state.tar_following = action.payload.following;
+    }
   },
 });
 

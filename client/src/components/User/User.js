@@ -1,16 +1,23 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { followuser, getuserdetails } from "../../redux/features/register/register";
+import {
+  followuser,
+  getfollowdata,
+  getuserdetails,
+} from "../../redux/features/register/register";
 import Loading from "../../utils/Loading";
 
 const User = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getuserdetails(props.match.params.id));
+    dispatch(getfollowdata(props.match.params.id));
   }, []);
   const loading = useSelector((state) => state.users.loading)
+  // get targeted user details
   const userdetails = useSelector((state) => state.users.user);
+  // get current logged in users details
   const currentuser = useSelector((state) => state.auth.user);
   const parsedcurruser = JSON.parse(currentuser)
   const currname = parsedcurruser.name
@@ -73,12 +80,12 @@ if(loading){
           posts
         </div>
         <div className="w-1/3 followers">
-          <strong> 65</strong>
+          <strong> {followers.length}</strong>
           <br />
           followers
         </div>
         <div className="w-1/3 following">
-          <strong> 61</strong>
+          <strong> {following.length}</strong>
           <br />
           following
         </div>
