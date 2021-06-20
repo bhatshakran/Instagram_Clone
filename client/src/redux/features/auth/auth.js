@@ -71,18 +71,20 @@ export const loginSlice = createSlice({
   extraReducers: {
     [loginUser.fulfilled]: (state, action) => {
       localStorage.setItem("token", action.payload.data.token);
-      localStorage.setItem('user', JSON.stringify(action.payload.data.user))
+      localStorage.setItem("user", JSON.stringify(action.payload.data.user));
       state.token = action.payload.data.token;
       state.isAuthenticated = true;
       state.loading = false;
       // state.user = action.payload.data.user;
-
-      
+    },
+    [getcurrentuser.pending]: (state, action) => {
+      state.loading = true;
     },
 
-    [getcurrentuser.fulfilled] :(state, action) => {
-      state.user = action.payload
-    }
+    [getcurrentuser.fulfilled]: (state, action) => {
+      state.loading = false;;
+      state.user = action.payload;
+    },
   },
 });
 export const { logoutUser } = loginSlice.actions;

@@ -124,7 +124,7 @@ router.get('/currentuser', auth, async(req, res) =>{
 router.get('/user/:id', auth, async(req, res) =>{
   try {
     let user = await User.findById(req.params.id).select("-password");
-    res.json(user)
+    res.send(user);
     
   } catch (err) {
     console.error(err.message)
