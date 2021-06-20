@@ -23,7 +23,6 @@ return <div className="flex items-center justify-center h-screen ">
   return (
     <div className="min-h-screen mx-auto mt-5 maincontainer">
       {Object.values(posts).map((post) => {
-        console.log(posts);
         return (
           <Postcard
             image={post.image}

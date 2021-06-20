@@ -76,13 +76,9 @@ export const followuser = createAsyncThunk('followuser', async(data)=>{
 
 
 // Unfollow user
-export const unfollowuser = createAsyncThunk('followuser', async(data)=>{
+export const unfollowuser = createAsyncThunk('unfollowuser', async(id)=>{
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    
     const setAuthToken = token =>{
       if (token) {
         axios.defaults.headers.common["x-auth-token"] = token;
@@ -95,10 +91,9 @@ export const unfollowuser = createAsyncThunk('followuser', async(data)=>{
       setAuthToken(localStorage.token)
   }
 
-  const {id, name} = data;
-  const body = JSON.stringify({name})
+  
    
-    const res = await axios.put(`/api/auth/follow/${id}`, body, config )
+    const res = await axios.put(`/api/auth/unfollow/${id}`);
     return res.data
   } catch (err) {
     console.error(err.message)
@@ -143,8 +138,7 @@ export const registerSlice = createSlice({
     loading: true,
     user: {},
     message: "",
-    tar_followers:[],
-    tar_following:[]
+    
   },
   reducers: {},
   extraReducers: {
@@ -165,8 +159,19 @@ export const registerSlice = createSlice({
     [getfollowdata.fulfilled]: (state, action) => {
       state.loading = false;
       state.message = 'Fetched user follow data';
-      state.tar_followers = action.payload.followers;
-      state.tar_following = action.payload.following;
+     
+    },
+    [followuser.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [unfollowuser.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [followuser.fulfilled]: (state, action) => {
+      state.loading = false;
+    },
+    [unfollowuser.fulfilled]: (state, action) => {
+      state.loading = false;
     }
   },
 });

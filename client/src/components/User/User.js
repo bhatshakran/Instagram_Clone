@@ -3,24 +3,26 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   followuser,
-  getfollowdata,
   getuserdetails,
+  unfollowuser,
 } from "../../redux/features/register/register";
 import Loading from "../../utils/Loading";
+import { useHistory } from "react-router";
 
 const User = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [subscribed, setsubscribed] = useState(true)
+  
 
-  useEffect( () => {
+  useEffect(() => {
     // setsubscribed(true)
-    if(subscribed){
+    if (subscribed) {
       dispatch(getuserdetails(props.match.params.id));
     }
-   return () =>{
-     setsubscribed(false)
-  
-   }
+    return () => {
+      setsubscribed(false);
+    };
   }, []);
   
   const loading = useSelector((state) => state.users.loading)
@@ -38,31 +40,42 @@ const User = (props) => {
      let length = Object.keys(userdetails).length;
     if(length>0){
       if(userdetails.followers.filter(follower => follower.name === currname).length > 0){
-        console.log(true)
+       console.log(true)
        return true;
       }else {
         console.log(false)
-      return false;
+       
+        return false;
       }
     }
     
     }
-    checkFollow()
+
+    
+  
+      checkFollow();
+
+  
 
 
 // follow unfollow handler function
-  const followhandler = () =>{
-    const data ={
-      id:props.match.params.id,
-      name:currname
+  const followhandler = async () => {
+    const data = {
+      id: props.match.params.id,
+      name: currname,
+    };
+    if (checkFollow()) {
+      await dispatch(unfollowuser(data.id));
+      history.go(0)
+
+      
+    } else {
+      await dispatch(followuser(data));
+      history.go(0)
     }
-    if(checkFollow()){
-      console.log('unfollowing')
-    }else{
-      dispatch(followuser(data))
-    }
+   
     
-  }
+  };
 
 
 
