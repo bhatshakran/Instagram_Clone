@@ -33,6 +33,7 @@ router.post(
         image: req.body.link,
         name: user.name,
         postedBy: user.id,
+        userpp: user.profilepic,
       });
 
       const post = await newPost.save();

@@ -20,33 +20,35 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   likes: [
-    
-      {user:{
+    {
+      user: {
         type: ObjectId,
         ref: "user",
-    }
-  }
+      },
+    },
   ],
-  comments:[
+  comments: [
     {
-      user:{
-        type:ObjectId,
-        ref:"user"
+      user: {
+        type: ObjectId,
+        ref: "user",
       },
-      text:{
-        type:String, 
-        required:true,
+      text: {
+        type: String,
+        required: true,
       },
-      name:{
-        type:String
-      }
-      
-    }
+      name: {
+        type: String,
+      },
+    },
   ],
 
   postedBy: {
     type: ObjectId,
     ref: "user",
+  },
+  userpp: {
+    type: String,
   },
 });
 

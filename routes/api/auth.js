@@ -215,8 +215,7 @@ router.put('/follow/:id', auth, async(req, res) => {
 router.put('/unfollow/:id', auth, async(req, res) => {
   try {
     let user = await User.findById(req.params.id).select('-password, -email');
-    console.log(user)
-    console.log(req.user.id)
+   
     // Check if the current user follows the targeted user or not
     if(user.followers.filter(follower => follower.id.toString() === req.user.id).length === 0){
       return res.status(400).json("You do not follow the user!")
@@ -227,7 +226,7 @@ router.put('/unfollow/:id', auth, async(req, res) => {
      const removeIndex = user.followers
      .map((follower) => follower.id.toString())
      .indexOf(req.user.id);
-     console.log(removeIndex)
+     
      
      
     
@@ -239,7 +238,7 @@ router.put('/unfollow/:id', auth, async(req, res) => {
 
     // Remove the user  unfollowed from the current users following
     let currentuser = await User.findById(req.user.id)
-console.log(currentuser)
+    
     // Get remove index
     const removeIndex2 = currentuser.following
     .map((following) => following._id.toString())

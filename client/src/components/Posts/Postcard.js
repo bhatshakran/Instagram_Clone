@@ -5,7 +5,7 @@ import Comment from "./Comment";
 import { Link } from "react-router-dom";
 
 
-const Postcard = ({ image, name, title, body, postid, id }) => {
+const Postcard = ({ image, name, title, body, postid, id, pp }) => {
   const [postlikes, setpostlikes] = useState();
   const currentUserID = useSelector((state) => state.posts.user._id);
   const dispatch = useDispatch();
@@ -98,7 +98,11 @@ const Postcard = ({ image, name, title, body, postid, id }) => {
 
   return (
     <div className="pb-4 mb-4 border border-gray-200 rounded-sm shadow-sm postcard">
-      <div className="px-16 pt-1 border-b top">
+      <div className="grid grid-cols-5 pt-1 border-b top">
+        <div className='mx-3'>
+          <img src={pp} alt="" className='w-12 h-12 rounded-full'/>
+          </div>
+          <div className='col-start-2 col-end-6'>
         <h4>
           <Link to={`/user/${id}`}>
             <strong>{name}</strong>
@@ -107,6 +111,7 @@ const Postcard = ({ image, name, title, body, postid, id }) => {
         <h5>
           <small>{title}</small>
         </h5>
+        </div>
       </div>
       <div className="medium">
         <img src={image} alt="" className="mx-auto md:mt-2 fill" />

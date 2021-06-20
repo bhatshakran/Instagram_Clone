@@ -21,8 +21,9 @@ return <div className="flex items-center justify-center h-screen ">
         </div>
   }else{
   return (
-    <div className="mx-auto mt-5 maincontainer">
+    <div className="min-h-screen mx-auto mt-5 maincontainer">
       {Object.values(posts).map((post) => {
+        console.log(posts);
         return (
           <Postcard
             image={post.image}
@@ -32,12 +33,13 @@ return <div className="flex items-center justify-center h-screen ">
             postid={post._id}
             lykes={post.likes}
             id={post.postedBy}
+            pp={post.userpp}
             key={post._id}
           />
         );
       })}
     </div>
-  )
+  );
     }
 };
 
