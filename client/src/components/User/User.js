@@ -14,22 +14,17 @@ const User = (props) => {
   const history = useHistory();
   const [subscribed, setsubscribed] = useState(true);
 
-  let parsedcurruser;
-  let currname;
+
   useEffect(async () => {
     // setsubscribed(true)
     if (subscribed) {
-       await dispatch(getuserdetails(props.match.params.id));
-       const  stringifieduser = JSON.stringify(currentuser)
-     parsedcurruser = JSON.parse(stringifieduser);
-     currname = parsedcurruser.name;
-    
+      await dispatch(getuserdetails(props.match.params.id));
     }
     return () => {
       setsubscribed(false);
     };
   }, []);
-
+let currname;
   const loading = useSelector((state) => state.auth.loading);
   // get targeted user details
   const userdetails = useSelector((state) => state.users.user);
@@ -37,6 +32,7 @@ const User = (props) => {
   // get current logged in users details
   const currentuser = useSelector((state) => state.auth.user);
 
+  
 
 
   const { name, bio, username, followers, following, profilepic } = userdetails;
@@ -44,15 +40,33 @@ const User = (props) => {
   // check if current user follows the targeted user or not
   const checkFollow = () => {
     let length = Object.keys(userdetails).length;
+    const followers = userdetails.followers;
+
+    
+
     if (length > 0) {
+      let parseduser = JSON.parse(currentuser);
+    
+     
+    function isFollowed() {
+      currname = parseduser.name;
+      for (let follower of followers) { 
+        if (follower.name.toString() === currname.toString()) {  
+          return true;
+        }
+      }
+    }
+    isFollowed()
+    
+     
+
       if (
-        userdetails.followers.filter((follower) => follower.name === currname)
-          .length > 0
+        isFollowed() === true
       ) {
-        console.log(true);
+        console.log(true)
         return true;
       } else {
-        console.log(false);
+    
 
         return false;
       }

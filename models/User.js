@@ -36,23 +36,23 @@ const userSchema = new mongoose.Schema({
     {
       id: {
         type: ObjectId,
-        ref: "user"
+        ref: "user",
       },
-      name:{
-        type: String
-      }
-    } 
+      name: {
+        type: String,
+      },
+    },
   ],
   following: [
     {
       id: {
         type: ObjectId,
-        ref: "user"
+        ref: "user",
       },
-      name:{
-        type:String
-      }
-    }
+      name: {
+        type: String,
+      },
+    },
   ],
 });
 
